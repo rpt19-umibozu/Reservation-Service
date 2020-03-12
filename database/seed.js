@@ -1,0 +1,183 @@
+var faker = require ('faker');
+var fs = require('fs');
+
+
+var price = faker.commerce.price(100,180.00,2)
+console.log('price', price)
+
+
+
+var listingTableData = ``;
+var bookingTableData = ``;
+var arrOfCalendarDays = [];
+
+
+
+var toFillListingItemsTable = function () {
+  var listingId = 10000;
+  var weekend;
+ //set random number to set max num of Guests
+  for (var i = 0; i < 100; i++) {
+   //random price using Faker npm package
+    var pricePerNight = faker.commerce.price(100,180.00,2); //range between 100 - 180
+    //random value to get weekend variable either true or false
+    var random = Math.floor(Math.random() * 10);
+    var maxGuests = Math.floor(Math.random() * 3 + 2);
+    //setup boolean for if weekend price is applicable
+    if (random % 2 === 0) {
+      weekend = 0;
+    } else {
+      weekend = 1;
+    }
+
+
+    //add randowm value to set weekend as true or false
+    listingTableData += `INSERT into listingItems (listingId, pricePerNight, weekend, weekendPrice, maxGuests, tax) VALUES (${listingId}, ${pricePerNight}, ${weekend}, 1.1, ${maxGuests}, 1.12);\n `
+    listingId++;
+  }
+  //return listingTableData;
+
+}
+//invoke function to populate Listing table data
+toFillListingItemsTable();
+
+
+
+
+//to fill the arr with days of 4 months starting April - July //April [30 days], May[31 days], etc
+var makeCalendarDays = function() {
+
+  var num;
+  var isTrue = true;
+
+  while (arrOfCalendarDays.length === 0 || arrOfCalendarDays.length < 125) {
+    if (isTrue) {
+      num = 30;
+    } else {
+      num = 31;
+    }
+  for (var i = 1; i <= num; i++) {
+    arrOfCalendarDays.push(i);
+  }
+  //alternating between 30 days and 31 days
+    isTrue = !isTrue;
+
+  }
+
+}
+//invoke makeCalendarDays to fill the arrOfCalendarDays variable
+makeCalendarDays();
+
+//function to check Which Month is it for start date and end date
+var checkWhichMonth = function (acum) {
+  var month;
+  if (acum < 30) {
+   month = '04'; //April
+  } else if (acum >= 30 && acum <= 60) {
+  month = '05'; //May
+  } else if (acum >= 61 && acum <= 90 ) {
+    month = '06'; //June
+  } else if (acum >= 91 && acum <= 121 ) {
+    month = '07';  //July
+  }
+  return month;
+}
+
+var setUpSixBookingsPerListing = function (arr, listingId) {
+  var mysqlQueriesForEachListingItem =''
+  var acum = 0;
+  var month;
+  //adding 6 bookings per item
+  for (i = 0; i < 6; i++) {
+    var days = Math.floor(Math.random() * 4 + 2);
+    //console.log('days', days)
+    var rangeInBetween = Math.floor(Math.random() * 9 + 4 );
+    //console.log('rangeInBetween', rangeInBetween)
+    var guests = Math.floor(Math.random() * 2 + 1 );
+    start = arr[rangeInBetween + acum];
+    if (String(start).length === 1) {
+      start =`0${start}`;
+    }
+
+    end = arr[days + rangeInBetween + acum];
+    if (String(end).length === 1) {
+      end =`0${end}`;
+    }
+
+    month = checkWhichMonth(acum + rangeInBetween);
+    var checkInDate = `2020-${month}-${start}`;
+    month = checkWhichMonth(days + rangeInBetween + acum);
+    var checkOutDate =  `2020-${month}-${end}`;
+    acum += days + rangeInBetween;
+    var eachQuery = `INSERT into bookings (listingId, nights, checkIn, checkOut, guests, children, infants) VALUES (${listingId}, ${days}, '${checkInDate}', '${checkOutDate}', ${guests}, 0, 0 ); \n `;
+    mysqlQueriesForEachListingItem += eachQuery;
+  }
+//console.log('acum', acum)
+  return mysqlQueriesForEachListingItem;
+}
+
+//console.log('setUpRanges', setUpSixBookingsPerListing(arrOfCalendarDays, 10000))
+
+
+var toFillBookingsTable = function (arr, listingId) {
+
+  for (var i = 0; i < 100; i++) {
+    bookingTableData += setUpSixBookingsPerListing(arr, listingId);
+    listingId++;
+  }
+  //console.log('bookingTableData', bookingTableData)
+
+
+
+};
+
+toFillBookingsTable(arrOfCalendarDays, 10000);
+
+var writeSchema = function (callback) {
+  fs.writeFile ('../schema.sql', schema, function (err, results) {
+    if (err) {
+      console.log('err', err);
+    } else {
+      console.log('success');
+    }
+  })
+}
+//console.log('listingTableData', listingTableData)
+var schema = `
+DROP DATABASE IF EXISTS reservation_service;
+
+CREATE DATABASE reservation_service;
+
+USE reservation_service;
+
+CREATE TABLE listingItems (
+  id int NOT NULL AUTO_INCREMENT,
+  listingId int NOT NULL,
+  pricePerNight DECIMAL(5, 2) NOT NULL,
+  weekend boolean NOT NULL default 0,
+  weekendPrice DECIMAL(3, 2) NOT NULL,
+  maxGuests int NOT NULL,
+  tax DECIMAL(3, 2) NOT NULL,
+  PRIMARY KEY(id)
+
+);
+
+CREATE TABLE bookings (
+  id int NOT NULL AUTO_INCREMENT,
+  listingId int,
+  nights int,
+  checkIn date,
+  checkOut date,
+  guests int,
+  children int default 0,
+  infants int default 0,
+  PRIMARY KEY(id)
+);
+
+${listingTableData}
+${bookingTableData}
+
+`
+//write Schema into Schema.sql file
+writeSchema();
+
