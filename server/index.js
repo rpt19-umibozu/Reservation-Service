@@ -14,10 +14,6 @@ app.use(bodyParser.json());
 
 
 
-
-
-
-
 app.use(express.static(__dirname + '/../client/dist'));
 
 // app.get('/', (req, res) => {
