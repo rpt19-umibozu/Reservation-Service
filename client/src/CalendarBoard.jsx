@@ -31,6 +31,7 @@ var CalendarBoard = (props) => {
         })}
         </tbody>
     </table>
+    <button onClick={props.onClear}>Clear Dates</button>
   </div>
  )
       }
