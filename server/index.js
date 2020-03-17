@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { connection } = require ('../database');
+const { connection, getListingInfo } = require ('../database');
 
 const app = express();
 app.use(morgan('dev'));
@@ -13,17 +13,18 @@ app.use(bodyParser.json());
 
 
 
+app.get('/', (req, res) => {
+  var reqId = req.body.listingId;
+ // getListingInfor
 
+})
 
 
 
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-// app.get('/', (req, res) => {
 
-//   res.end('hello world')
-// })
 
 
 
