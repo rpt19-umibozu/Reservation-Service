@@ -3,8 +3,8 @@ import DayComponent from './DayComponent.jsx';
 
 var WeekRow = (props) => (
 <tr>
-{props.week.map((day) => {
-    return <DayComponent onDayClick={props.onDayClick} month={props.month} days={day} booked={props.booked}/>
+{props.week.map((day, i) => {
+    return <DayComponent key={i} onDayClick={props.onDayClick} month={props.month} days={day} booked={props.booked}/>
    })}
 </tr>
 )
