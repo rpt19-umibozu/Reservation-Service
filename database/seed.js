@@ -14,7 +14,7 @@ var arrOfCalendarDays = [];
 
 
 var toFillListingItemsTable = function () {
-  var listingId = 10000;
+  var listingId = 10001;
   var weekend;
  //set random number to set max num of Guests
   for (var i = 0; i < 100; i++) {
@@ -105,11 +105,11 @@ var setUpSixBookingsPerListing = function (arr, listingId) {
     }
 
     month = checkWhichMonth(acum + rangeInBetween);
-    var checkInDate = `2020-${month}-${start}`;
+    var checkInDate = `${month}-${start}`;
     month = checkWhichMonth(days + rangeInBetween + acum);
-    var checkOutDate =  `2020-${month}-${end}`;
+    var checkOutDate =  `${month}-${end}`;
     acum += days + rangeInBetween;
-    var eachQuery = `INSERT into bookings (listingId, nights, checkIn, checkOut, guests, children, infants) VALUES (${listingId}, ${days}, '${checkInDate}', '${checkOutDate}', ${guests}, 0, 0 ); \n `;
+    var eachQuery = `INSERT into bookings (listingId, nights, month, checkIn, checkOut, guests, children, infants) VALUES (${listingId}, ${days}, '${month}', '${checkInDate}', '${checkOutDate}', ${guests}, 0, 0 ); \n `;
     mysqlQueriesForEachListingItem += eachQuery;
   }
 //console.log('acum', acum)
@@ -131,7 +131,7 @@ var toFillBookingsTable = function (arr, listingId) {
 
 };
 
-toFillBookingsTable(arrOfCalendarDays, 10000);
+toFillBookingsTable(arrOfCalendarDays, 10001);
 
 var writeSchema = function (callback) {
   fs.writeFile ('../schema.sql', schema, function (err, results) {
@@ -166,8 +166,9 @@ CREATE TABLE bookings (
   id int NOT NULL AUTO_INCREMENT,
   listingId int,
   nights int,
-  checkIn date,
-  checkOut date,
+  month VARCHAR(4),
+  checkIn VARCHAR(10),
+  checkOut VARCHAR(10),
   guests int,
   children int default 0,
   infants int default 0,
