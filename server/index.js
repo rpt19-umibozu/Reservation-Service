@@ -14,15 +14,27 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-  var reqId = req.body.listingId;
- // getListingInfor
+  //default listing id is 10001;
+  //should give listingId 10001 back to the client when page first renders
+  var reqId = 10001;
+  getListingInfo(reqId, (err, results) => {
+    if (err) {
+      res.status(404).end('NOT FOUND')
+      console.log('err', err);
+    } else {
+      var stringifyResults = JSON.stringify(results);
+      console.log('stringifyResults', stringifyResults)
+      console.log('results', results)
+      res.status(202).end(stringifyResults);
+    }
+  })
 
 })
 
 
-
-
 app.use(express.static(__dirname + '/../client/dist'));
+
+
 
 
 
