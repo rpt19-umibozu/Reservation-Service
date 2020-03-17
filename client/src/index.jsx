@@ -16,8 +16,10 @@ class App extends React.Component {
       timesToggledonCheckinAndCheckOut: 0,
       displayCheckOut: false,
       checkin: null,
-      checkout: null
+      checkout: null,
+      bookedDates: ['03-14','03-15', '03-16']
     }
+    //bookedDates inside state are manually entered mock data for testing
     this.goToNextMonth = this.goToNextMonth.bind(this);
     this.goToPreviousMonth = this.goToPreviousMonth.bind(this);
     this.onDayClick = this.onDayClick.bind(this);
@@ -51,7 +53,6 @@ class App extends React.Component {
      })
 
   }
-
 
 
   //Calendar Component methods
@@ -129,7 +130,8 @@ class App extends React.Component {
    console.log('clear Dates')
    this.setState({
      checkin: null,
-     checkout: null
+     checkout: null,
+     timesToggledonCheckinAndCheckOut: 0
    })
  }
 
@@ -150,7 +152,7 @@ class App extends React.Component {
       <>
      <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button><button>{placeHolderTwo}</button>
 
-    <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton}/>}</div>
+    <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
       </>
     )
   }

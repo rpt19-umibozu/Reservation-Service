@@ -27,7 +27,7 @@ var CalendarBoard = (props) => {
         {props.monthGrid.map((dataArr, i) => {
           //maybe change <tb> to <tbody> as well?
           //maybe remove the <tr>s from below?
-          return <WeekRow onDayClick={props.onDayClick} month={props.monthNum}key={i} week={dataArr} />
+          return <WeekRow onDayClick={props.onDayClick} month={props.monthNum}key={i} week={dataArr} booked={props.booked}/>
         })}
         </tbody>
     </table>
