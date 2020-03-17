@@ -86,7 +86,6 @@ var checkWhichMonth = function (acum) {
 var setUpSixBookingsPerListing = function (arr, listingId) {
   var mysqlQueriesForEachListingItem =''
   var acum = 0;
-  var month;
   //adding 6 bookings per item
   for (i = 0; i < 6; i++) {
     var days = Math.floor(Math.random() * 4 + 2);
@@ -104,12 +103,13 @@ var setUpSixBookingsPerListing = function (arr, listingId) {
       end =`0${end}`;
     }
 
-    month = checkWhichMonth(acum + rangeInBetween);
-    var checkInDate = `${month}-${start}`;
-    month = checkWhichMonth(days + rangeInBetween + acum);
-    var checkOutDate =  `${month}-${end}`;
+    var startMonth = checkWhichMonth(acum + rangeInBetween);
+    var checkInDate = `${startMonth}-${start}`;
+    var endMonth = checkWhichMonth(days + rangeInBetween + acum);
+    var checkOutDate =  `${endMonth}-${end}`;
     acum += days + rangeInBetween;
-    var eachQuery = `INSERT into bookings (listingId, nights, month, checkIn, checkOut, guests, children, infants) VALUES (${listingId}, ${days}, '${month}', '${checkInDate}', '${checkOutDate}', ${guests}, 0, 0 ); \n `;
+    var startMonthSliced = startMonth.slice(0, 2);
+    var eachQuery = `INSERT into bookings (listingId, nights, month, checkIn, checkOut, guests, children, infants) VALUES (${listingId}, ${days}, '${startMonthSliced}', '${checkInDate}', '${checkOutDate}', ${guests}, 0, 0 ); \n `;
     mysqlQueriesForEachListingItem += eachQuery;
   }
 //console.log('acum', acum)
