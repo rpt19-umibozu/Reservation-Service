@@ -9,12 +9,13 @@
   },
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "start": "nodemon --inspect server/index.js",
+    "start": "nodemon server/index.js",
     "seed-db": "node database/seed.js"
   },
   "dependencies": {
     "express": "^4.17.1",
     "faker": "^4.1.0",
+    "minimist": "^1.2.5",
     "morgan": "^1.9.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.2",
