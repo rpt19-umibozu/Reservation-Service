@@ -123,7 +123,8 @@ class App extends React.Component {
   var newStr = checkOutDate.replace('-', '/')
   newStr = '2020/' + newStr;
     this.setState({
-      checkout: newStr
+      checkout: newStr,
+      toggleCheckinToDisplayCalendar: false
     })
  }
  clearDatesButton () {
@@ -138,7 +139,7 @@ class App extends React.Component {
   render () {
     var placeHolderOne;
     var placeHolderTwo;
-    if (this.state.toggleCheckinToDisplayCalendar && this.state.checkin !== null) {
+    if (this.state.checkin !== null) {
       placeHolderOne = this.state.checkin;
     } else {
       placeHolderOne = 'Check-in';
