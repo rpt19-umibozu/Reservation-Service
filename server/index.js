@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
-
+app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/', (req, res) => {
   //default listing id is 10001;
@@ -28,9 +28,9 @@ app.get('/', (req, res) => {
       res.status(202).end(stringifyResults);
     }
   })
+})
 
 
-app.use(express.static(__dirname + '/../client/dist'));
 
 
 

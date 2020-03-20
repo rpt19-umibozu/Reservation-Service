@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
-import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth } from './help.js'
+import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth } from './helperFunc.js'
 
 
 class App extends React.Component {

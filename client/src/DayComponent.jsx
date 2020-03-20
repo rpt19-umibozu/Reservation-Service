@@ -1,5 +1,5 @@
 import React from 'react';
-import { zeroPadding } from './help.js'
+import { zeroPadding } from './helperFunc.js'
 
 var DayComponent = (props) => {
   var day = zeroPadding(props.days);
