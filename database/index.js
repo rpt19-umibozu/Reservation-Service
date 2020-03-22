@@ -17,7 +17,7 @@ const getListingInfo = (listingId, callback) => {
   })
 }
 
-const getDatesBooked = (listingId, callback) => {
+const getBookedDates = (listingId, callback) => {
   var queryStr = `Select * from bookings Where listingId=${listingId};`
   connection.query(queryStr, (err, results) => {
     if (err) {
@@ -30,5 +30,5 @@ const getDatesBooked = (listingId, callback) => {
 
 
 module.exports = {
-  connection, getListingInfo, getDatesBooked
+  connection, getListingInfo, getBookedDates
 }
