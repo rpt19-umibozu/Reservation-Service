@@ -30,8 +30,16 @@ app.get('/', (req, res) => {
   });
 })
 
-app.get(./bookedDates, (req, res) => {
+app.get('/getBookedDates', (req, res) => {
   var listingId = req.body.listingId;
+  getDatesBooked(listingId, (err, results) => {
+    if (err) {
+      res.status(404).end('NOT FOUND');
+    } else {
+      var stringifyResults = JSON.stringify(results);
+      res.status(202).end(stringifyResults);
+    }
+  })
 
 })
 
