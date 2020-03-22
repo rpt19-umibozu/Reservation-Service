@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { connection, getListingInfo } = require ('../database');
+const { connection, getListingInfo, getDatesBooked } = require ('../database');
 
 const app = express();
 app.use(morgan('dev'));
@@ -27,7 +27,12 @@ app.get('/', (req, res) => {
       console.log('results', results)
       res.status(202).end(stringifyResults);
     }
-  })
+  });
+})
+
+app.get(./bookedDates, (req, res) => {
+  var listingId = req.body.listingId;
+
 })
 
 

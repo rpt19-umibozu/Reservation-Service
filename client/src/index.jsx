@@ -151,6 +151,8 @@ class App extends React.Component {
     }
     return (
       <>
+      <p>placeholder for price per night</p>
+      <p>placeholder for average reviews</p>
      <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button><button>{placeHolderTwo}</button>
 
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
