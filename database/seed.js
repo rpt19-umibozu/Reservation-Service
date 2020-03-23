@@ -196,14 +196,14 @@ var setUpSixBookingsPerListing = function (arr, listingId) {
     //console.log('rangeInBetween', rangeInBetween)
     var guests = Math.floor(Math.random() * 2 + 1 );
     start = arr[rangeInBetween + acum];
-    if (String(start).length === 1) {
-      start =`0${start}`;
-    }
+    // if (String(start).length === 1) {
+    //   start =`0${start}`;
+    // }
 
     end = arr[days + rangeInBetween + acum];
-    if (String(end).length === 1) {
-      end =`0${end}`;
-    }
+    // if (String(end).length === 1) {
+    //   end =`0${end}`;
+    // }
 
     var startMonth = checkWhichMonth(acum + rangeInBetween);
     var checkInDate = `${startMonth}-${start}`;
