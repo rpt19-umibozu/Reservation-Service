@@ -1,23 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
-import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth } from './helperFunc.js'
+import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights } from './helperFunc.js';
+import $ from 'jquery';
 
 
 class App extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      currentYear: null,
-      monthName: null,
-      monthNumber: null,
-      grid: [],
+      currentYear: null, //calendarComponent
+      monthName: null,  //calendarComponent
+      monthNumber: null,  //calendarComponent
+      grid: [], //monthGrid
       toggleCheckinToDisplayCalendar: false,
       timesToggledonCheckinAndCheckOut: 0,
       displayCheckOut: false,
-      checkin: null,
-      checkout: null,
-      bookedDates: ['03-14','03-15', '03-16']
+      checkin: null,  //input from user
+      checkout: null,  //input from user
+      bookedDates: [], //fetched from db
+      listingName: '',
+      price: null,
+      tax: null,
+      serviceFee: null,
+      numOfNights: null,
+      maxGuests: null,
+      weekedBoolean: null
+
+
     }
     //bookedDates inside state are manually entered mock data for testing
     this.goToNextMonth = this.goToNextMonth.bind(this);
@@ -26,6 +36,9 @@ class App extends React.Component {
     this.onClickCheckinButton = this.onClickCheckinButton.bind(this);
     this.displayCheckOutDate = this.displayCheckOutDate.bind(this);
     this.clearDatesButton = this.clearDatesButton.bind(this);
+    this.getBookedDates = this.getBookedDates.bind(this);
+    this.getBookingInfo = this.getBookingInfo.bind(this);
+    this.postIdToServer = this.postIdToServer.bind(this);
 
 
   }
@@ -44,6 +57,10 @@ class App extends React.Component {
       grid: grid,
       monthNumber: currentMonth
     })
+    var urlOne = '/';
+    var listingId = 10001
+    this.postIdToServer(urlOne, listingId);
+    this.getBookedDates('/getBookedDates', listingId);
   }
   onClickCheckinButton () {
 
@@ -135,6 +152,75 @@ class App extends React.Component {
      timesToggledonCheckinAndCheckOut: 0
    })
  }
+ getDataFromDb (listingId, callback) {
+   $.ajax({
+     method: 'GET',
+     url: endPoint,
+     success: (data) => {
+       callback(null, data);
+     },
+     error: (err) => {
+       console.log('error', err);
+     }
+   })
+ }
+ postIdToServer (url, id) {
+  var bodyObj = {
+    listingId: id
+  };
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: bodyObj,
+    success: (data) => {
+    var parsedData = JSON.parse(data);
+    console.log('parsedData', parsedData)
+    var name = parsedData[0].listingName;
+    var price = parsedData[0].pricePerNight;
+    var maxGuests = parsedData[0].maxGuests;
+    var weekendBoolean = parsedData[0].weekend;
+    this.setState({
+      listingName: name,
+      price: price,
+      maxGuests: maxGuests
+    })
+    },
+    error: (err) => {
+      console.log('error', err);
+    }
+  })
+
+ }
+ getBookingInfo () {
+
+ }
+
+ getBookedDates (url, id) {
+  var bodyObj = {
+    listingId: id
+  };
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: bodyObj,
+    success: (data) => {
+    var parsedData = JSON.parse(data);
+    console.log('parsedData', parsedData)
+    var checkIn = parsedData[0].checkIn;
+    var checkOut = parsedData[0].checkOut;
+    console.log('getBookedDates', parsedData)
+    var bookedDatesArray = iterateOverDataArray(parsedData)
+    this.setState({
+      bookedDates: bookedDatesArray
+    })
+    },
+    error: (err) => {
+      console.log('error', err);
+    }
+  })
+
+ }
+
 
   render () {
     var placeHolderOne;
