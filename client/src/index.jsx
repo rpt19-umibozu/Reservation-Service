@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
+import PriceBreakup from './PriceBreakup.jsx';
 import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights } from './helperFunc.js';
 import $ from 'jquery';
 
@@ -22,10 +23,11 @@ class App extends React.Component {
       listingName: '',
       price: null,
       tax: null,
-      serviceFee: null,
+      serviceFee: 0.1,
       numOfNights: null,
       maxGuests: null,
-      weekedBoolean: null
+      weekedBoolean: null,
+      displayPriceBreakup: false
 
 
     }
@@ -152,7 +154,8 @@ class App extends React.Component {
 
     this.setState({
       checkout: newStr,
-      toggleCheckinToDisplayCalendar: !this.state.toggleCheckinToDisplayCalendar
+      toggleCheckinToDisplayCalendar: !this.state.toggleCheckinToDisplayCalendar,
+      displayPriceBreakup: true
     })
 
 
@@ -165,7 +168,8 @@ class App extends React.Component {
      checkout: null,
      timesToggledonCheckinAndCheckOut: 0,
      numOfNights: null,
-     displayCheckOut: true
+     displayCheckOut: true,
+     displayPriceBreakup: false
    })
  }
  getDataFromDb (listingId, callback) {
@@ -195,10 +199,12 @@ class App extends React.Component {
     var price = parsedData[0].pricePerNight;
     var maxGuests = parsedData[0].maxGuests;
     var weekendBoolean = parsedData[0].weekend;
+    var tax = parsedData[0].tax;
     this.setState({
       listingName: name,
       price: price,
-      maxGuests: maxGuests
+      maxGuests: maxGuests,
+      tax: tax
     })
     },
     error: (err) => {
@@ -259,7 +265,7 @@ class App extends React.Component {
 
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
     <div><select><option>Guests</option></select></div>
-    <div>price, service, tax and total display</div>
+    <div>{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
     <button>Reserve</button>
       </>
     )
