@@ -128,7 +128,7 @@ class App extends React.Component {
     })
   }
 
-  if (this.state.displayCheckOut) {
+  if (this.state.checkin) {
     this.displayCheckOutDate(e);
   }
 
@@ -137,19 +137,35 @@ class App extends React.Component {
  displayCheckOutDate (e) {
  console.log('went in displayCheckOutDate')
   var checkOutDate = e.target.id;
-  var newStr = checkOutDate.replace('-', '/')
+  console.log('checkOutDate', checkOutDate)
+  if (this.state.checkin) {
+  var checkInDate = this.state.checkin;
+  console.log('checkInDate', checkInDate)
+  var checkIn = checkInDate.slice(5)
+  var checkInFormatted = checkIn.replace('/', '-');
+  var numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate)
+  this.setState({numOfNights: numOfNights})
+  }
+  var newStr = checkOutDate.replace('-', '/');
   newStr = '2020/' + newStr;
+
+
     this.setState({
       checkout: newStr,
-      toggleCheckinToDisplayCalendar: false
+      toggleCheckinToDisplayCalendar: !this.state.toggleCheckinToDisplayCalendar
     })
+
+
  }
  clearDatesButton () {
    console.log('clear Dates')
+
    this.setState({
      checkin: null,
      checkout: null,
-     timesToggledonCheckinAndCheckOut: 0
+     timesToggledonCheckinAndCheckOut: 0,
+     numOfNights: null,
+     displayCheckOut: true
    })
  }
  getDataFromDb (listingId, callback) {
@@ -237,11 +253,14 @@ class App extends React.Component {
     }
     return (
       <>
-      <p>placeholder for price per night</p>
+      <p>${this.state.price} per night</p>
       <p>placeholder for average reviews</p>
      <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button><button>{placeHolderTwo}</button>
 
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
+    <div><select><option>Guests</option></select></div>
+    <div>price, service, tax and total display</div>
+    <button>Reserve</button>
       </>
     )
   }

@@ -160,7 +160,7 @@ export const calculateNumOfNights = (checkIn, checkOut) => {
   var checkInMonthDays = Number(checkIn.slice(3));
   var checkOutMonthDays = Number(checkOut.slice(3));
   if (checkInMonth === checkOutMonth) {
-     numOfNights = checkOutMonthDays - checkInMonthDays - 1;
+     numOfNights = checkOutMonthDays - checkInMonthDays;
   } else {
     if (checkInMonth[0] === '0') {
       month = Number(checkInMonth.slice(1));
