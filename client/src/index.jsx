@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
+import GuestsDisplay from  './GuestsDisplay.jsx';
 import PriceBreakup from './PriceBreakup.jsx';
 import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights } from './helperFunc.js';
 import $ from 'jquery';
+import '../dist/style.css'
 
 
 class App extends React.Component {
@@ -27,7 +29,12 @@ class App extends React.Component {
       numOfNights: null,
       maxGuests: null,
       weekedBoolean: null,
-      displayPriceBreakup: false
+      displayPriceBreakup: false,
+      displayGuestsMenu: false,
+      toggleGuestsMenuCount: 0,
+      guests: 1,
+      numOfChildren: 0,
+      numOfInfants:0
 
 
     }
@@ -39,12 +46,16 @@ class App extends React.Component {
     this.displayCheckOutDate = this.displayCheckOutDate.bind(this);
     this.clearDatesButton = this.clearDatesButton.bind(this);
     this.getBookedDates = this.getBookedDates.bind(this);
-    this.getBookingInfo = this.getBookingInfo.bind(this);
     this.postIdToServer = this.postIdToServer.bind(this);
+    this.onHandleGuestsClick = this.onHandleGuestsClick.bind(this);
+    this.onIncreaseOfAdults = this.onIncreaseOfAdults.bind(this);
+    this.onDecreaseOfAdults = this.onDecreaseOfAdults.bind(this);
+    this.onHandleCloseGuestsDisplay = this.onHandleCloseGuestsDisplay.bind(this);
 
 
   }
   componentDidMount() {
+    console.log('window', window.location.href)
     var currentYear = +(new Date().getFullYear());
     var currentMonth = +(new Date().getMonth()) + 1;
     var monthFirstDay = getMonthFirstDay(currentMonth, currentYear)
@@ -59,8 +70,15 @@ class App extends React.Component {
       grid: grid,
       monthNumber: currentMonth
     })
+    var listingId;
     var urlOne = '/';
-    var listingId = 10001
+    var windowUrlString = window.location.href;
+    if (windowUrlString[windowUrlString.length - 1] === '/') {
+      listingId = 10001
+    } else {
+      listingId = Number(windowUrlString.slice(-5));
+      console.log('listingId', listingId)
+    }
     this.postIdToServer(urlOne, listingId);
     this.getBookedDates('/getBookedDates', listingId);
   }
@@ -213,9 +231,6 @@ class App extends React.Component {
   })
 
  }
- getBookingInfo () {
-
- }
 
  getBookedDates (url, id) {
   var bodyObj = {
@@ -242,6 +257,39 @@ class App extends React.Component {
   })
 
  }
+ onHandleGuestsClick () {
+
+   if (this.state.toggleGuestsMenuCount === 0) {
+   this.setState({
+     displayGuestsMenu: true,
+     toggleGuestsMenuCount: this.state.toggleGuestsMenuCount+1
+   })
+  } else {
+    this.setState({
+      displayGuestsMenu: false,
+      toggleGuestsMenuCount: this.state.toggleGuestsMenuCount-1
+    })
+  }
+ }
+ onIncreaseOfAdults () {
+   console.log('clicked to increase')
+   this.setState({
+     guests: this.state.guests+1
+   })
+ }
+
+ onDecreaseOfAdults () {
+  console.log('clicked to decrease')
+  this.setState({
+    guests: this.state.guests-1
+  })
+ }
+ onHandleCloseGuestsDisplay () {
+   this.setState({
+     displayGuestsMenu: false,
+     toggleGuestsMenuCount: 0
+   })
+ }
 
 
   render () {
@@ -264,7 +312,13 @@ class App extends React.Component {
      <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button><button>{placeHolderTwo}</button>
 
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
-    <div><select><option>Guests</option></select></div>
+    <div>
+      <><p onClick={this.onHandleGuestsClick}>{this.state.guests} Guest</p></>
+      </div>
+      <div>
+    {this.state.displayGuestsMenu && <GuestsDisplay guests={this.state.guests} numOfChildren={this.state.numOfChildren} numOfInfants={this.state.numOfInfants} onIncrease= {this.onIncreaseOfAdults} onDecrease= {this.onDecreaseOfAdults} onClose={this.onHandleCloseGuestsDisplay}/>} </div>
+
+
     <div>{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
     <button>Reserve</button>
       </>
@@ -272,5 +326,5 @@ class App extends React.Component {
   }
 }
 
-
+//{this.state.displayGuestsMenu && <GuestsDisplay />}
 ReactDOM.render(<App/>, document.getElementById('app'))
