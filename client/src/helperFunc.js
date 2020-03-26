@@ -99,4 +99,83 @@ export const zeroPadding = (n) => {
   return n;
 }
 
+export const getDatesRange = (checkIn, checkOut) => {
+  //create storageArr
+  var storage = [];
+  var year = 2020;
+  var dateString;
+  var checkInMonth = checkIn.slice(0, 2);
+  var checkOutMonth = checkOut.slice(0, 2);
+  console.log('checInMonth', checkInMonth)
+  var checkInMonthDays = Number(checkIn.slice(3));
+  var checkOutMonthDays = Number(checkOut.slice(3));
+  console.log('checkInMonthSDays', checkInMonthDays);
+  //same month for checkin date and checkout date
+  if (checkInMonth === checkOutMonth ) {
+    for (var i = checkInMonthDays; i <= checkOutMonthDays; i++){
+      dateString = `${checkInMonth}-${i}`
+      storage.push(dateString)
+    }
+  }
+  if (checkInMonth !== checkOutMonth) {
+    var month;
+    if (checkInMonth[0] === '0') {
+      month = Number(checkInMonth.slice(1));
+    } else {
+      month = Number(checkInMonth);
+    }
+    var days = getMonthDays(month, year);
+   // console.log('monthTwo', month)
+   for (var i = checkInMonthDays; i <= days; i++){
+      dateString = `${checkInMonth}-${i}`;
+      storage.push(dateString);
+   }
+   for (var i = 1; i < checkOutMonthDays; i++) {
+         dateString = `${checkOutMonth}-${i}`;
+      storage.push(dateString);
+   }
+  }
+  return storage;
+}
+
+export const iterateOverDataArray = (data) => {
+  var storage = [];
+  for (var i = 0; i < data.length; i++) {
+    var eachObj = data[i];
+    var checkIn = eachObj.checkIn;
+    var checkOut = eachObj.checkOut;
+    var storageRangePerDataSet = getDatesRange(checkIn, checkOut);
+    storage = storage.concat(storageRangePerDataSet)
+  }
+  return storage;
+}
+
+export const calculateNumOfNights = (checkIn, checkOut) => {
+  var numOfNights;
+  var month;
+  var year = 2020;
+  var checkInMonth = checkIn.slice(0, 2);
+  var checkOutMonth = checkOut.slice(0, 2);
+  console.log('checkInMonth', checkInMonth)
+  var checkInMonthDays = Number(checkIn.slice(3));
+  var checkOutMonthDays = Number(checkOut.slice(3));
+  if (checkInMonth === checkOutMonth) {
+     numOfNights = checkOutMonthDays - checkInMonthDays;
+  } else {
+    if (checkInMonth[0] === '0') {
+      month = Number(checkInMonth.slice(1));
+    } else {
+      month = Number(checkInMonth);
+    }
+    var days = getMonthDays(month, year);
+    var firstSetOfDaysFromCheckInMonth = days - checkInMonthDays;
+    var secondSetOfDaysFromCheckOutMonth = checkOutMonthDays;
+    numOfNights = firstSetOfDaysFromCheckInMonth + secondSetOfDaysFromCheckOutMonth - 1;
+  }
+  return numOfNights;
+}
+
+
+
+
 

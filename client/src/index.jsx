@@ -1,23 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
-import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth } from './helperFunc.js'
+import PriceBreakup from './PriceBreakup.jsx';
+import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights } from './helperFunc.js';
+import $ from 'jquery';
 
 
 class App extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      currentYear: null,
-      monthName: null,
-      monthNumber: null,
-      grid: [],
+      currentYear: null, //calendarComponent
+      monthName: null,  //calendarComponent
+      monthNumber: null,  //calendarComponent
+      grid: [], //monthGrid
       toggleCheckinToDisplayCalendar: false,
       timesToggledonCheckinAndCheckOut: 0,
       displayCheckOut: false,
-      checkin: null,
-      checkout: null,
-      bookedDates: ['03-14','03-15', '03-16']
+      checkin: null,  //input from user
+      checkout: null,  //input from user
+      bookedDates: [], //fetched from db
+      listingName: '',
+      price: null,
+      tax: null,
+      serviceFee: 0.1,
+      numOfNights: null,
+      maxGuests: null,
+      weekedBoolean: null,
+      displayPriceBreakup: false
+
+
     }
     //bookedDates inside state are manually entered mock data for testing
     this.goToNextMonth = this.goToNextMonth.bind(this);
@@ -26,6 +38,9 @@ class App extends React.Component {
     this.onClickCheckinButton = this.onClickCheckinButton.bind(this);
     this.displayCheckOutDate = this.displayCheckOutDate.bind(this);
     this.clearDatesButton = this.clearDatesButton.bind(this);
+    this.getBookedDates = this.getBookedDates.bind(this);
+    this.getBookingInfo = this.getBookingInfo.bind(this);
+    this.postIdToServer = this.postIdToServer.bind(this);
 
 
   }
@@ -44,6 +59,10 @@ class App extends React.Component {
       grid: grid,
       monthNumber: currentMonth
     })
+    var urlOne = '/';
+    var listingId = 10001
+    this.postIdToServer(urlOne, listingId);
+    this.getBookedDates('/getBookedDates', listingId);
   }
   onClickCheckinButton () {
 
@@ -111,7 +130,7 @@ class App extends React.Component {
     })
   }
 
-  if (this.state.displayCheckOut) {
+  if (this.state.checkin) {
     this.displayCheckOutDate(e);
   }
 
@@ -120,21 +139,110 @@ class App extends React.Component {
  displayCheckOutDate (e) {
  console.log('went in displayCheckOutDate')
   var checkOutDate = e.target.id;
-  var newStr = checkOutDate.replace('-', '/')
+  console.log('checkOutDate', checkOutDate)
+  if (this.state.checkin) {
+  var checkInDate = this.state.checkin;
+  console.log('checkInDate', checkInDate)
+  var checkIn = checkInDate.slice(5)
+  var checkInFormatted = checkIn.replace('/', '-');
+  var numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate)
+  this.setState({numOfNights: numOfNights})
+  }
+  var newStr = checkOutDate.replace('-', '/');
   newStr = '2020/' + newStr;
+
+
     this.setState({
       checkout: newStr,
-      toggleCheckinToDisplayCalendar: false
+      toggleCheckinToDisplayCalendar: !this.state.toggleCheckinToDisplayCalendar,
+      displayPriceBreakup: true
     })
+
+
  }
  clearDatesButton () {
    console.log('clear Dates')
+
    this.setState({
      checkin: null,
      checkout: null,
-     timesToggledonCheckinAndCheckOut: 0
+     timesToggledonCheckinAndCheckOut: 0,
+     numOfNights: null,
+     displayCheckOut: true,
+     displayPriceBreakup: false
    })
  }
+ getDataFromDb (listingId, callback) {
+   $.ajax({
+     method: 'GET',
+     url: endPoint,
+     success: (data) => {
+       callback(null, data);
+     },
+     error: (err) => {
+       console.log('error', err);
+     }
+   })
+ }
+ postIdToServer (url, id) {
+  var bodyObj = {
+    listingId: id
+  };
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: bodyObj,
+    success: (data) => {
+    var parsedData = JSON.parse(data);
+    console.log('parsedData', parsedData)
+    var name = parsedData[0].listingName;
+    var price = parsedData[0].pricePerNight;
+    var maxGuests = parsedData[0].maxGuests;
+    var weekendBoolean = parsedData[0].weekend;
+    var tax = parsedData[0].tax;
+    this.setState({
+      listingName: name,
+      price: price,
+      maxGuests: maxGuests,
+      tax: tax
+    })
+    },
+    error: (err) => {
+      console.log('error', err);
+    }
+  })
+
+ }
+ getBookingInfo () {
+
+ }
+
+ getBookedDates (url, id) {
+  var bodyObj = {
+    listingId: id
+  };
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: bodyObj,
+    success: (data) => {
+    var parsedData = JSON.parse(data);
+    console.log('parsedData', parsedData)
+    var checkIn = parsedData[0].checkIn;
+    var checkOut = parsedData[0].checkOut;
+    console.log('getBookedDates', parsedData)
+    var bookedDatesArray = iterateOverDataArray(parsedData)
+    this.setState({
+      bookedDates: bookedDatesArray
+    })
+    },
+    error: (err) => {
+      console.log('error', err);
+    }
+  })
+
+ }
+
 
   render () {
     var placeHolderOne;
@@ -151,9 +259,14 @@ class App extends React.Component {
     }
     return (
       <>
+      <p>${this.state.price} per night</p>
+      <p>placeholder for average reviews</p>
      <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button><button>{placeHolderTwo}</button>
 
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
+    <div><select><option>Guests</option></select></div>
+    <div>{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
+    <button>Reserve</button>
       </>
     )
   }

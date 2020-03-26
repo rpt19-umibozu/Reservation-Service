@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { connection, getListingInfo } = require ('../database');
+const { connection, getListingInfo, getBookedDates } = require ('../database');
 
 const app = express();
 app.use(morgan('dev'));
@@ -13,21 +13,38 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
   //default listing id is 10001;
   //should give listingId 10001 back to the client when page first renders
-  var reqId = 10001;
+  var reqId = req.body.listingId;
+  //console.log('reqID', reqId)
   getListingInfo(reqId, (err, results) => {
     if (err) {
       res.status(404).end('NOT FOUND')
       console.log('err', err);
     } else {
       var stringifyResults = JSON.stringify(results);
-      console.log('stringifyResults', stringifyResults)
-      console.log('results', results)
+      //console.log('stringifyResults', stringifyResults)
+      //console.log('results', results)
+      res.status(202).end(stringifyResults);
+    }
+  });
+})
+
+app.post('/getBookedDates', (req, res) => {
+  var listingId = req.body.listingId;
+  console.log('reqbody', req.body)
+  console.log('listingId from getBookedDates', listingId)
+  getBookedDates(listingId, (err, results) => {
+    if (err) {
+      res.status(404).end('NOT FOUND');
+    } else {
+      var stringifyResults = JSON.stringify(results);
+      console.log(stringifyResults)
       res.status(202).end(stringifyResults);
     }
   })
+
 })
 
 

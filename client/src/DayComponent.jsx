@@ -2,7 +2,7 @@ import React from 'react';
 import { zeroPadding } from './helperFunc.js'
 
 var DayComponent = (props) => {
-  var day = zeroPadding(props.days);
+  var day = props.days;
   var month = zeroPadding(props.month);
   var value = `${month}-${day}`;
   var style;

@@ -12,13 +12,23 @@ const getListingInfo = (listingId, callback) => {
       console.log('err from db')
     } else {
       callback(null, results);
-      ('succss from db')
+      ('success from db')
     }
   })
+}
 
+const getBookedDates = (listingId, callback) => {
+  var queryStr = `Select * from bookings Where listingId=${listingId};`
+  connection.query(queryStr, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
 }
 
 
 module.exports = {
-  connection, getListingInfo
+  connection, getListingInfo, getBookedDates
 }
