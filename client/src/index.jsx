@@ -133,12 +133,15 @@ class App extends React.Component {
  }
  onDayClick(e) {
    console.log('onDayClick', e.target.id)
+  var checkInDate = e.target.id;
   var clickedTimes = this.state.timesToggledonCheckinAndCheckOut;
+  var bookedDates = this.state.bookedDates;
+  if (!bookedDates.includes(checkInDate)) {
   this.setState({
     timesToggledonCheckinAndCheckOut: clickedTimes+1
   })
   if (this.state.timesToggledonCheckinAndCheckOut < 1) {
-   var checkInDate = e.target.id;
+
    var newStr = checkInDate.replace('-', '/')
    console.log('newStr', newStr)
    newStr = '2020/' + newStr;
@@ -147,7 +150,7 @@ class App extends React.Component {
       displayCheckOut: !this.state.displayCheckOut
     })
   }
-
+  }
   if (this.state.checkin) {
     this.displayCheckOutDate(e);
   }
@@ -246,7 +249,7 @@ class App extends React.Component {
     var checkIn = parsedData[0].checkIn;
     var checkOut = parsedData[0].checkOut;
     console.log('getBookedDates', parsedData)
-    var bookedDatesArray = iterateOverDataArray(parsedData)
+    var bookedDatesArray = iterateOverDataArray(parsedData);
     this.setState({
       bookedDates: bookedDatesArray
     })
@@ -305,12 +308,16 @@ class App extends React.Component {
     } else {
       placeHolderTwo = 'Checkout';
     }
+    var style;
     return (
-      <>
+      <div className="mainFrame">
       <p>${this.state.price} per night</p>
       <p>placeholder for average reviews</p>
-     <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button><button>{placeHolderTwo}</button>
-
+      <p>Dates</p>
+      <div className="dateFrame">
+     <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button>
+     <button>{placeHolderTwo}</button>
+     </div>
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
     <div>
       <><p onClick={this.onHandleGuestsClick}>{this.state.guests} Guest</p></>
@@ -320,8 +327,9 @@ class App extends React.Component {
 
 
     <div>{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
-    <button>Reserve</button>
-      </>
+    <br></br>
+    <button className="reserveButton">Reserve</button>
+      </div>
     )
   }
 }

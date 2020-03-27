@@ -5,16 +5,23 @@ var DayComponent = (props) => {
   var day = props.days;
   var month = zeroPadding(props.month);
   var value = `${month}-${day}`;
-  var style;
-  if (props.booked.includes(value)) {
-   style = {fontWeight: 'bold'}
-
+  if (day !== '') {
+    value = `${month}-${day}`;
   } else {
-    style = {fontWeight: 'normal'}
+    value = 'empty'
+  }
+  var className;
+  if (!props.booked.includes(value)) {
+   name = 'availableDay'
+  } else {
+    name = 'unavailableDay'
+  }
+  if (value === 'empty') {
+    name = 'empty'
   }
   return (
 
-<td style={style} onClick={props.onDayClick} id={value}>{props.days}</td>
+<td className={name} onClick={props.onDayClick} id={value}>{props.days}</td>
 
   )
 

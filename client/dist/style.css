@@ -1,0 +1,67 @@
+.calendarFrame, .day {
+  border-style: solid;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  text-align: center;
+  float:center;
+}
+
+.mainFrame {
+  width: 200px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 10px;
+  border-color: rgb(113, 116, 101);
+  padding: 5px;
+  padding-right: 5%;
+  text-align: left;
+}
+
+.dateFrame {
+  border-style: solid;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  text-align: center;
+}
+.clearButton {
+  float: right;
+  padding:0 1px;
+}
+
+.guestButton, .closeButton {
+float: right;
+}
+.unavailableDay {
+  border-style: solid;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  text-align: center;
+  float:center;
+  color: rgba(211, 202, 202, 0.87);
+  font-size: 12px;
+  text-decoration: line-through;
+  margin: 0px;
+  padding: 2px;
+}
+.availableDay  {
+  border:1px solid transparent;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  font-size: 12px;
+  text-align: center;
+  float:center;
+  color: black;
+  font-weight: 1px;
+  margin: 0px;
+  padding: 2px;
+
+}
+
+.availableDay:hover {
+  background-color: rgb(38, 198, 204);
+  border: 1px solid rgb(38, 171, 204);
+}
+
+.reserveButton {
+  float: center;
+}
