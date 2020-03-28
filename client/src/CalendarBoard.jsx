@@ -8,11 +8,10 @@ var CalendarBoard = (props) => {
 
  return (
   <div className="calendarFrame">
-    <h2>{props.month} {props.year}</h2>
-    <button onClick={props.onPrevious}>Previous</button>
-    <button onClick={props.onNext}>Next</button>
+    <button className="goLeft" onClick={props.onPrevious}>&larr;</button><span>{props.month} {props.year}</span>
+    <button className="goRight" onClick={props.onNext}>&rarr;</button>
 
-    <table>
+    <table className="calendarBoard" align="center">
       <thead>
         <td>Su</td>
         <td>Mo</td>

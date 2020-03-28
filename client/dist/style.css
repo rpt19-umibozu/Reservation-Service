@@ -4,6 +4,9 @@
   border-width: 1px;
   text-align: center;
   float:center;
+  border-radius: 1px;
+  z-index: 3;
+  margin: 10px;
 }
 
 .mainFrame {
@@ -15,6 +18,10 @@
   padding: 5px;
   padding-right: 5%;
   text-align: left;
+  font: Circular;
+  border-radius: 1px;
+  height: 350px;
+  z-index: 2;
 }
 
 .dateFrame {
@@ -22,13 +29,15 @@
   border-color: rgb(113, 116, 101);
   border-width: 1px;
   text-align: center;
+  border-radius: 7px;
+  z-index: 2;
 }
 .clearButton {
   float: right;
   padding:0 1px;
 }
 
-.guestButton, .closeButton {
+.guestButton, .closeButton, .goRight, .checkOutButton {
 float: right;
 }
 .unavailableDay {
@@ -65,3 +74,49 @@ float: right;
 .reserveButton {
   float: center;
 }
+.checkInButton, .goLeft {
+  float: left;
+}
+
+.checkOutButton {
+  position: relative;
+  }
+
+
+  .calendarBoard {
+    border-collapse: collapse
+  }
+  .perNight{
+    font-size: 10px;
+  }
+  .text {
+    font: Circular;
+  }
+
+  .priceBreakup {
+    z-index: 1;
+    margin-top: 15px;
+  }
+
+  .guestsMenu {
+    z-index: 2;
+    width: 200px;
+    position: absolute;
+    background-color: white;
+    border-style: solid;
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+
+
+  }
+  .guestsFrame {
+    height: 20px;
+    background-color: white;
+    border-style: solid;
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: rgba(116, 95, 28, 0.781);
+    text-align: left;
+    margin-top: 3px;
+  }

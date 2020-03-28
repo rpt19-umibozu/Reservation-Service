@@ -136,7 +136,7 @@ class App extends React.Component {
   var checkInDate = e.target.id;
   var clickedTimes = this.state.timesToggledonCheckinAndCheckOut;
   var bookedDates = this.state.bookedDates;
-  if (!bookedDates.includes(checkInDate)) {
+  if (!bookedDates.includes(checkInDate) && checkInDate !== 'empty') {
   this.setState({
     timesToggledonCheckinAndCheckOut: clickedTimes+1
   })
@@ -311,22 +311,24 @@ class App extends React.Component {
     var style;
     return (
       <div className="mainFrame">
-      <p>${this.state.price} per night</p>
-      <p>placeholder for average reviews</p>
-      <p>Dates</p>
+      <p>${this.state.price} <span className="perNight">per night</span></p>
+      <span>placeholder for average reviews</span>
+      <br></br>
+      <span>Dates</span>
       <div className="dateFrame">
-     <button onClick={this.onClickCheckinButton}>{placeHolderOne}</button>
-     <button>{placeHolderTwo}</button>
+     <button className="checkInButton" onClick={this.onClickCheckinButton}>{placeHolderOne}</button><span>&rarr;</span>
+     <button className="checkOutButton">{placeHolderTwo}</button>
      </div>
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
-    <div>
-      <><p onClick={this.onHandleGuestsClick}>{this.state.guests} Guest</p></>
+    <div className="text"><span>Guests</span></div>
+    <div className="guestsFrame">
+      <span onClick={this.onHandleGuestsClick}>{this.state.guests} Guest</span>
       </div>
-      <div>
-    {this.state.displayGuestsMenu && <GuestsDisplay guests={this.state.guests} numOfChildren={this.state.numOfChildren} numOfInfants={this.state.numOfInfants} onIncrease= {this.onIncreaseOfAdults} onDecrease= {this.onDecreaseOfAdults} onClose={this.onHandleCloseGuestsDisplay}/>} </div>
+      <div className="guestsMenu">
+    {this.state.displayGuestsMenu && <GuestsDisplay guests={this.state.guests} numOfChildren={this.state.numOfChildren} numOfInfants={this.state.numOfInfants} onIncrease= {this.onIncreaseOfAdults} onDecrease= {this.onDecreaseOfAdults} onClose={this.onHandleCloseGuestsDisplay}/>} <br></br></div>
 
 
-    <div>{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
+    <div className="priceBreakup">{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
     <br></br>
     <button className="reserveButton">Reserve</button>
       </div>
