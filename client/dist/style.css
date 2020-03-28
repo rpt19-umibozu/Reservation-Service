@@ -1,0 +1,122 @@
+.calendarFrame, .day {
+  border-style: solid;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  text-align: center;
+  float:center;
+  border-radius: 1px;
+  z-index: 3;
+  margin: 10px;
+}
+
+.mainFrame {
+  width: 200px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 10px;
+  border-color: rgb(113, 116, 101);
+  padding: 5px;
+  padding-right: 5%;
+  text-align: left;
+  font: Circular;
+  border-radius: 1px;
+  height: 350px;
+  z-index: 2;
+}
+
+.dateFrame {
+  border-style: solid;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  text-align: center;
+  border-radius: 7px;
+  z-index: 2;
+}
+.clearButton {
+  float: right;
+  padding:0 1px;
+}
+
+.guestButton, .closeButton, .goRight, .checkOutButton {
+float: right;
+}
+.unavailableDay {
+  border-style: solid;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  text-align: center;
+  float:center;
+  color: rgba(211, 202, 202, 0.87);
+  font-size: 12px;
+  text-decoration: line-through;
+  margin: 0px;
+  padding: 2px;
+}
+.availableDay  {
+  border:1px solid transparent;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  font-size: 12px;
+  text-align: center;
+  float:center;
+  color: black;
+  font-weight: 1px;
+  margin: 0px;
+  padding: 2px;
+
+}
+
+.availableDay:hover {
+  background-color: rgb(38, 198, 204);
+  border: 1px solid rgb(38, 171, 204);
+}
+
+.reserveButton {
+  float: center;
+}
+.checkInButton, .goLeft {
+  float: left;
+}
+
+.checkOutButton {
+  position: relative;
+  }
+
+
+  .calendarBoard {
+    border-collapse: collapse
+  }
+  .perNight{
+    font-size: 10px;
+  }
+  .text {
+    font: Circular;
+  }
+
+  .priceBreakup {
+    z-index: 1;
+    margin-top: 15px;
+  }
+
+  .guestsMenu {
+    z-index: 2;
+    width: 200px;
+    position: absolute;
+    background-color: white;
+    border-style: solid;
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+
+
+  }
+  .guestsFrame {
+    height: 20px;
+    background-color: white;
+    border-style: solid;
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: rgba(116, 95, 28, 0.781);
+    text-align: left;
+    margin-top: 3px;
+  }

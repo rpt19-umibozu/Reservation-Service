@@ -7,20 +7,19 @@ var CalendarBoard = (props) => {
  //const arr = createMonth(31, 6)
 
  return (
-  <div>
-    <h2>{props.month} {props.year}</h2>
-    <button onClick={props.onPrevious}>Previous</button>
-    <button onClick={props.onNext}>Next</button>
+  <div className="calendarFrame">
+    <button className="goLeft" onClick={props.onPrevious}>&larr;</button><span>{props.month} {props.year}</span>
+    <button className="goRight" onClick={props.onNext}>&rarr;</button>
 
-    <table>
+    <table className="calendarBoard" align="center">
       <thead>
-        <th>Su</th>
-        <th>Mo</th>
-        <th>Tu</th>
-        <th>We</th>
-        <th>Th</th>
-        <th>Fr</th>
-        <th>Sa</th>
+        <td>Su</td>
+        <td>Mo</td>
+        <td>Tu</td>
+        <td>We</td>
+        <td>Th</td>
+        <td>Fr</td>
+        <td>Sa</td>
       </thead>
        <tbody>
 
@@ -31,7 +30,8 @@ var CalendarBoard = (props) => {
         })}
         </tbody>
     </table>
-    <button onClick={props.onClear}>Clear Dates</button>
+    <button className="clearButton"
+    onClick={props.onClear}>Clear Dates</button>
   </div>
  )
       }

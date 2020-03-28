@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/', (req, res) => {
-  //default listing id is 10001;
   //should give listingId 10001 back to the client when page first renders
   var reqId = req.body.listingId;
   //console.log('reqID', reqId)
