@@ -5,8 +5,13 @@
   text-align: center;
   float:center;
   border-radius: 1px;
-  z-index: 3;
+  z-index: 4;
   margin: 10px;
+  position:absolute;
+  padding: 10px;
+  background-color: white;
+  width: 175px;
+  height: 155px;
 }
 
 .mainFrame {
@@ -15,10 +20,10 @@
   border-width: 1px;
   margin: 10px;
   border-color: rgb(113, 116, 101);
-  padding: 5px;
+  padding: 10px;
   padding-right: 5%;
   text-align: left;
-  font: Circular;
+  font-family: Circular;
   border-radius: 1px;
   height: 350px;
   z-index: 2;
@@ -84,7 +89,9 @@ float: right;
 
 
   .calendarBoard {
-    border-collapse: collapse
+    border-collapse: collapse;
+    z-index: 3;
+
   }
   .perNight{
     font-size: 10px;
@@ -119,4 +126,9 @@ float: right;
     border-color: rgba(116, 95, 28, 0.781);
     text-align: left;
     margin-top: 3px;
+    z-index: 2;
+  }
+
+  .emoji {
+    font-size: 10px;
   }
