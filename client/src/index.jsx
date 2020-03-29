@@ -46,7 +46,7 @@ class App extends React.Component {
     this.displayCheckOutDate = this.displayCheckOutDate.bind(this);
     this.clearDatesButton = this.clearDatesButton.bind(this);
     this.getBookedDates = this.getBookedDates.bind(this);
-    this.postIdToServer = this.postIdToServer.bind(this);
+    this.getListingInfoFromServer = this.getListingInfoFromServer.bind(this);
     this.onHandleGuestsClick = this.onHandleGuestsClick.bind(this);
     this.onIncreaseOfAdults = this.onIncreaseOfAdults.bind(this);
     this.onDecreaseOfAdults = this.onDecreaseOfAdults.bind(this);
@@ -70,16 +70,17 @@ class App extends React.Component {
       grid: grid,
       monthNumber: currentMonth
     })
-    var listingId;
-    var urlOne = '/';
+    var listingId = 10001;
+    var urlOne = '/listingInfo';
     var windowUrlString = window.location.href;
+    console.log('windowsUrl', windowUrlString)
     if (windowUrlString[windowUrlString.length - 1] === '/') {
       listingId = 10001
     } else {
       listingId = Number(windowUrlString.slice(-5));
-      console.log('listingId', listingId)
+      console.log('OtherlistingId', listingId)
     }
-    this.postIdToServer(urlOne, listingId);
+    this.getListingInfoFromServer(urlOne, listingId);
     this.getBookedDates('/getBookedDates', listingId);
   }
   onClickCheckinButton () {
@@ -205,17 +206,19 @@ class App extends React.Component {
      }
    })
  }
- postIdToServer (url, id) {
+ getListingInfoFromServer (url, id) {
   var bodyObj = {
     listingId: id
   };
+  console.log('getListingInfoFromServer loading')
   $.ajax({
-    method: 'POST',
+    method: 'GET',
     url: url,
     data: bodyObj,
     success: (data) => {
+      console.log('data', data)
     var parsedData = JSON.parse(data);
-    console.log('parsedData', parsedData)
+    //console.log('postIdToToServer Data', parsedData)
     var name = parsedData[0].listingName;
     var price = parsedData[0].pricePerNight;
     var maxGuests = parsedData[0].maxGuests;
