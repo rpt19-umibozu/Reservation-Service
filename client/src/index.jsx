@@ -8,7 +8,7 @@ import $ from 'jquery';
 import '../dist/style.css'
 
 
-class App extends React.Component {
+class Reservation extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
@@ -340,4 +340,4 @@ class App extends React.Component {
 }
 
 //{this.state.displayGuestsMenu && <GuestsDisplay />}
-ReactDOM.render(<App/>, document.getElementById('app'))
+ReactDOM.render(<Reservation/>, document.getElementById('reservation'))
