@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + '/../client/dist'));
 
 
 app.get('/listingInfo', (req, res) => {
@@ -33,7 +34,7 @@ app.get('/listingInfo', (req, res) => {
   });
 })
 
-app.use(express.static(__dirname + '/../client/dist'));
+
 app.post('/getBookedDates', (req, res) => {
   var listingId = req.body.listingId;
   //console.log('reqbody', req.body)
@@ -60,7 +61,6 @@ app.get('/:id', (req, res) => {
     }
   })
 })
-
 
 
 
