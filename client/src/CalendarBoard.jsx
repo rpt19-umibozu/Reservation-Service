@@ -30,7 +30,7 @@ var CalendarBoard = (props) => {
         })}
         </tbody>
     </table>
-    <button className="clearButton"
+    <button className="clearButton">
     onClick={props.onClear}>Clear Dates</button>
   </div>
  )
