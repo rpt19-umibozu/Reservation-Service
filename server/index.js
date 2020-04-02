@@ -13,22 +13,22 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 app.get('/listingInfo', (req, res) => {
   //should give listingId 10001 back to the client when page first renders
-  console.log('app.get')
   var reqId = req.query.listingId //.listingId;
-  console.log('reqID', reqId)
+  //console.log('reqID', reqId)
   getListingInfo(reqId, (err, results) => {
     if (err) {
       res.status(404).end('NOT FOUND')
       console.log('err', err);
     } else {
       var stringifyResults = JSON.stringify(results);
-      //console.log('stringifyResults', stringifyResults)
-      //console.log('results', results)
-      res.status(202).end(stringifyResults);
+      res.status(200).end(stringifyResults);
     }
   });
 })
