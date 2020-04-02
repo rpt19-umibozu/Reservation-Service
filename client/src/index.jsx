@@ -71,7 +71,7 @@ class Reservation extends React.Component {
       monthNumber: currentMonth
     })
     var listingId = 10001;
-    var urlOne = '/listingInfo';
+    var urlOne = 'http://localhost:3001/listingInfo';
     var windowUrlString = window.location.href;
     console.log('windowsUrl', windowUrlString)
     if (windowUrlString[windowUrlString.length - 1] === '/') {
@@ -81,7 +81,7 @@ class Reservation extends React.Component {
       console.log('OtherlistingId', listingId)
     }
     this.getListingInfoFromServer(urlOne, listingId);
-    this.getBookedDates('/getBookedDates', listingId);
+    this.getBookedDates('http://localhost:3001/getBookedDates', listingId);
   }
   onClickCheckinButton () {
 
