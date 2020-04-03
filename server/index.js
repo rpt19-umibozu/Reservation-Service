@@ -13,10 +13,15 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
+
+app.use(express.static(__dirname + '/../client/dist'));
+
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
+
 
 app.get('/listingInfo', (req, res) => {
   //should give listingId 10001 back to the client when page first renders
@@ -33,7 +38,7 @@ app.get('/listingInfo', (req, res) => {
   });
 })
 
-app.use(express.static(__dirname + '/../client/dist'));
+
 app.post('/getBookedDates', (req, res) => {
   var listingId = req.body.listingId;
   //console.log('reqbody', req.body)
@@ -68,7 +73,6 @@ app.get('/:id', (req, res) => {
 
 
 
-
 var port = 3001;
 
 app.listen(port, () => {
@@ -76,6 +80,6 @@ app.listen(port, () => {
 })
 
 
-
+module.exports = app;
 
 
