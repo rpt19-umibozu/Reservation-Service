@@ -5,7 +5,7 @@ var GuestsDisplay = (props) => {
 
   return (
   <div>
-    <table>
+    <table className="guestDisplay">
   <tr>
     <td>Adults</td>
     <td className="guestButton" ><button onClick={props.onDecrease} className="guestButton">-</button></td>
