@@ -3,21 +3,21 @@ import Enzyme from 'enzyme';
 import 'babel-polyfill';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, mount, render } from 'enzyme';
-import  App  from '../../client/src/index.jsx';
+import  Reservation  from '../../client/src/index.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock('../../client/src/index.jsx', () => 'App');
+jest.mock('../../client/src/index.jsx', () => 'Reservation');
 
 
 
 
-const wrapper = shallow(<App />);
+const wrapper = shallow(<Reservation />);
 
-describe('<App />', () => {
+describe('<Reservation />', () => {
 
   it('should contain a CalendarBoard child component', () => {
-    expect(wrapper.find(App)).toHaveLength(1);
+    expect(wrapper.find(Reservation)).toHaveLength(1);
   });
 
 })
