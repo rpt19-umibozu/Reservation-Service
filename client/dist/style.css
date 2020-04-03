@@ -27,7 +27,7 @@
   text-align: left;
   font-family: Circular;
   border-radius: 1px;
-  height: 350px;
+  height: 400px;
   z-index: 2;
   box-shadow: 0.1px 0.1px 1px #888888;
   border-radius: 1px !important;
@@ -114,6 +114,17 @@ float: right;
 
 .checkOutButton {
   position: relative;
+
+  }
+
+  .checkInButton:focus {
+    background: rgb(61, 176, 180);
+    color: rgb(250, 245, 245);
+  }
+
+  .checkOutButton:focus {
+    background: rgb(61, 176, 180);
+    color: rgb(241, 241, 247);
   }
 
 
@@ -180,8 +191,12 @@ float: right;
     width: 20px;
   }
 
-  #underReserve {
+  .underReserve {
     font-size: .75em;
     margin: 15px 0 0 60px;
+    font-family: sans-serif;
+  }
+  .underGuests {
+    font-size: .75em;
     font-family: sans-serif;
   }

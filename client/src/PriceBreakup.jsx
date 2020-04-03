@@ -32,6 +32,7 @@ var total = Number(subTotal) + Number(serviceSubtotal) + Number(taxAndFeesSubtot
      </tr>
      </tbody>
      </table>
+
      </div>
 
   )

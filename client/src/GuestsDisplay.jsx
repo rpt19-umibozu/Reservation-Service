@@ -25,7 +25,9 @@ var GuestsDisplay = (props) => {
     <td><button>+</button></td>
   </tr>
   </table>
-  <button className="closeButton"
+
+    <p className="underGuests">2 guests maximum. Infants don’t count toward the number of guests.</p>
+    <button className="closeButton"
   onClick={props.onClose}>Close</button>
   </div>
   )
