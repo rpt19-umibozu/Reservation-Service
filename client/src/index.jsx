@@ -347,6 +347,7 @@ class Reservation extends React.Component {
     <div className="priceBreakup">{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
     <br></br>
     <button className="reserveButton">Reserve</button>
+    <div id="underReserve">You won't be charged yet.</div>
       </div>
     )
   }
