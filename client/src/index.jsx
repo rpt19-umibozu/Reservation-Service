@@ -34,7 +34,9 @@ class Reservation extends React.Component {
       toggleGuestsMenuCount: 0,
       guests: 1,
       numOfChildren: 0,
-      numOfInfants:0
+      numOfInfants:0,
+      reviews: '',
+      msgUnderReserveButton: 'You won\'t be charged yet.'
 
 
     }
@@ -51,6 +53,7 @@ class Reservation extends React.Component {
     this.onIncreaseOfAdults = this.onIncreaseOfAdults.bind(this);
     this.onDecreaseOfAdults = this.onDecreaseOfAdults.bind(this);
     this.onHandleCloseGuestsDisplay = this.onHandleCloseGuestsDisplay.bind(this);
+    this.getReviews = this.getReviews.bind(this);
 
 
   }
@@ -71,7 +74,7 @@ class Reservation extends React.Component {
       monthNumber: currentMonth
     })
     var listingId = 10001;
-    var urlOne = '/listingInfo';
+    var urlOne = 'http://localhost:3001/listingInfo';
     var windowUrlString = window.location.href;
     console.log('windowsUrl', windowUrlString)
     if (windowUrlString[windowUrlString.length - 1] === '/') {
@@ -80,8 +83,13 @@ class Reservation extends React.Component {
       listingId = Number(windowUrlString.slice(-5));
       console.log('OtherlistingId', listingId)
     }
+    var reviewUrl = 'http://localhost:3004/averageScore' + listingId;
+    console.log('reviewUrl', reviewUrl)
     this.getListingInfoFromServer(urlOne, listingId);
-    this.getBookedDates('/getBookedDates', listingId);
+    this.getBookedDates('http://localhost:3001/getBookedDates', listingId);
+    this.getReviews(reviewUrl);
+
+
   }
   onClickCheckinButton () {
 
@@ -194,12 +202,17 @@ class Reservation extends React.Component {
      displayPriceBreakup: false
    })
  }
- getDataFromDb (listingId, callback) {
+ getReviews(endPoint) {
+
    $.ajax({
      method: 'GET',
      url: endPoint,
-     success: (data) => {
-       callback(null, data);
+     success: (results) => {
+       var removeComma = results.split(',');
+       console.log('removeComma', removeComma)
+       this.setState({
+         reviews: removeComma
+       })
      },
      error: (err) => {
        console.log('error', err);
@@ -298,6 +311,7 @@ class Reservation extends React.Component {
  }
 
 
+
   render () {
     var placeHolderOne;
     var placeHolderTwo;
@@ -315,7 +329,7 @@ class Reservation extends React.Component {
     return (
       <div className="mainFrame">
       <p>${this.state.price} <span className="perNight">per night</span></p>
-      <span>placeholder for average reviews</span>
+      <span>{this.state.reviews}</span>
       <br></br>
       <span>Dates</span>
       <div className="dateFrame">
@@ -334,6 +348,7 @@ class Reservation extends React.Component {
     <div className="priceBreakup">{this.state.displayPriceBreakup && <PriceBreakup numOfNights={this.state.numOfNights} serviceFee={this.state.serviceFee} price={this.state.price} tax={this.state.tax}/>}</div>
     <br></br>
     <button className="reserveButton">Reserve</button>
+    <div className="underReserve">{this.state. displayPriceBreakup && this.state.msgUnderReserveButton}</div>
       </div>
     )
   }
