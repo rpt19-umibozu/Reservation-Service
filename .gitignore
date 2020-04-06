@@ -2,5 +2,6 @@ node_modules
 client/dist/bundle.js
 /client/dist/bundle.js
 bundle.js
+__snapchats__
 
 

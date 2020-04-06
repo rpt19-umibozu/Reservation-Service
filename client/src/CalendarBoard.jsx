@@ -12,17 +12,18 @@ var CalendarBoard = (props) => {
     <button className="goRight" onClick={props.onNext}>&rarr;</button>
 
     <table className="calendarBoard" align="center">
-
-        <th className="tableHead">Su</th>
-        <th className="tableHead">Mo</th>
-        <th className="tableHead">Tu</th>
-        <th className="tableHead">We</th>
-        <th className="tableHead">Th</th>
-        <th className="tableHead">Fr</th>
-        <th className="tableHead">Sa</th>
-
-       <tbody>
-
+         <thead>
+            <tr>
+              <th className="tableHead">Su</th>
+              <th className="tableHead">Mo</th>
+              <th className="tableHead">Tu</th>
+              <th className="tableHead">We</th>
+              <th className="tableHead">Th</th>
+              <th className="tableHead">Fr</th>
+              <th className="tableHead">Sa</th>
+            </tr>
+          </thead>
+          <tbody>
         {props.monthGrid.map((dataArr, i) => {
           //maybe change <tb> to <tbody> as well?
           //maybe remove the <tr>s from below?

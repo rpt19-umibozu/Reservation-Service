@@ -315,31 +315,39 @@ class Reservation extends React.Component {
   render () {
     var placeHolderOne;
     var placeHolderTwo;
+    var checkOutNewClassName;
     if (this.state.checkin !== null) {
       placeHolderOne = this.state.checkin;
+
     } else {
       placeHolderOne = 'Check-in';
     }
     if (this.state.timesToggledonCheckinAndCheckOut > 1 && this.state.checkin !== null) {
       placeHolderTwo = this.state.checkout;
+
     } else {
       placeHolderTwo = 'Checkout';
+      checkOutNewClassName = 'checkOutButton'
+
     }
-    var style;
+    if(this.state.timesToggledonCheckinAndCheckOut !== 0) {
+      checkOutNewClassName = 'checkOutButtonTwo';
+    }
+
     return (
       <div className="mainFrame">
       <p>${this.state.price} <span className="perNight">per night</span></p>
-      <span>{this.state.reviews}</span>
+      <span><img id="star" src="https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/airbnb_star.png"/>{this.state.reviews[0]}<span className="numOfReview">{this.state.reviews[1]}</span></span>
       <br></br>
-      <span>Dates</span>
+      <span className="datesStr">Dates</span>
       <div className="dateFrame">
      <button className="checkInButton" onClick={this.onClickCheckinButton}>{placeHolderOne}</button><span>&rarr;</span>
-     <button className="checkOutButton">{placeHolderTwo}</button>
+     <button className={checkOutNewClassName}>{placeHolderTwo}</button>
      </div>
     <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
-    <div className="text"><span>Guests</span></div>
+    <div id="guestsStr"><span>Guests</span></div>
     <div className="guestsFrame">
-      <span onClick={this.onHandleGuestsClick}>{this.state.guests} Guest</span>
+      <span className="guestsDiv" onClick={this.onHandleGuestsClick}>  {this.state.guests} Guest</span>
       </div>
       <div className="guestsMenu">
     {this.state.displayGuestsMenu && <GuestsDisplay guests={this.state.guests} numOfChildren={this.state.numOfChildren} numOfInfants={this.state.numOfInfants} onIncrease= {this.onIncreaseOfAdults} onDecrease= {this.onDecreaseOfAdults} onClose={this.onHandleCloseGuestsDisplay}/>} <br></br></div>
