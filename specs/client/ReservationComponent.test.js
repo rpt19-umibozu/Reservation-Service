@@ -14,7 +14,16 @@ jest.mock('../../client/src/index.jsx', () => 'Reservation');
 
 const wrapper = shallow(<Reservation />);
 
-describe('<Reservation />', () => {
+describe('Reservation', () => {
+
+
+  it('should be defined', () => {
+    expect(Reservation).toBeDefined();
+  });
+
+  it('should render correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
   it('should contain a CalendarBoard child component', () => {
     expect(wrapper.find(Reservation)).toHaveLength(1);
