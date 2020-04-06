@@ -15,19 +15,19 @@ var total = Number(subTotal) + Number(serviceSubtotal) + Number(taxAndFeesSubtot
       <table>
         <tbody>
      <tr className="priceTable">
-       <td className="priceData">${price}x{numOfNights} nights<span className="emoji">&#128359;</span></td>
+       <td className="priceData">${price}x{numOfNights} nights <span className="emoji">&#128359;</span></td>
        <td className="priceData">${subTotal}</td>
        </tr>
        <tr className="priceTable">
-     <td className="priceTable">ServiceFee<span className="emoji">&#128359;</span></td>
+     <td className="priceTable">Service fee <span className="emoji">&#128359;</span></td>
      <td className="priceData">${serviceSubtotal}</td>
      </tr>
      <tr className="priceTable">
-     <td className="priceTable">Occupancy taxes and fees<span className="emoji">&#128359;</span></td>
+     <td className="priceTable">Occupancy taxes and <br></br><span>fees</span> <span className="emoji">&#128359;</span></td>
      <td className="priceData">${taxAndFeesSubtotal}</td>
      </tr>
      <tr className="priceTable">
-     <td className="priceTable">Total</td>
+     <td className="priceTable">Total </td>
      <td className="priceData">${total}</td>
      </tr>
      </tbody>
