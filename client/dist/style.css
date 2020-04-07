@@ -259,3 +259,10 @@ float: right;
     font-family: ariel,sans-serif;
     font-size: 13px;
   }
+  .circle {
+    width: 16px;
+    height: 12px;
+    padding-top: 3px;
+    cursor: pointer;
+
+  }
