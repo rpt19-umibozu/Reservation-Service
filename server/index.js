@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { connection, getListingInfo, getBookedDates } = require ('../database');
 const fs = require('fs');
-const fullPath = '/Users/yingwenchen/Desktop/HR project/HR_RPT/FEC/FEC_Yingwen_service/client/dist/index.html';
+const fullPath = '/home/ubuntu/FEC_Yingwen_service/FEC_Yingwen_service/client/dist/index.html';
 
 const app = express();
 app.use(morgan('dev'));
