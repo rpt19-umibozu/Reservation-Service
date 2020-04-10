@@ -1,6 +1,6 @@
 module.exports = {
   host: 'localhost',
-  user: 'root',
-  password: '',
+  user: 'ying',
+  password: 'helloworld',
   database: 'reservation_service'
 }
