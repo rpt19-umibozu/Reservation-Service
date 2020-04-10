@@ -74,7 +74,7 @@ class Reservation extends React.Component {
       monthNumber: currentMonth
     })
     var listingId = 10001;
-    var urlOne = 'http://localhost:3001/listingInfo';
+    var urlOne = 'http://ec2-18-231-77-64.sa-east-1.compute.amazonaws.com:3001/listingInfo';
     var windowUrlString = window.location.href;
     console.log('windowsUrl', windowUrlString)
     if (windowUrlString[windowUrlString.length - 1] === '/') {
@@ -86,7 +86,7 @@ class Reservation extends React.Component {
     var reviewUrl = 'http://localhost:3004/averageScore' + listingId;
     console.log('reviewUrl', reviewUrl)
     this.getListingInfoFromServer(urlOne, listingId);
-    this.getBookedDates('http://localhost:3001/getBookedDates', listingId);
+    this.getBookedDates('http://ec2-18-231-77-64.sa-east-1.compute.amazonaws.com:3001/getBookedDates', listingId);
     this.getReviews(reviewUrl);
 
 
