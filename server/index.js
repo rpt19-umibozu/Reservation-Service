@@ -73,7 +73,7 @@ app.get('/:id', (req, res) => {
 
 
 
-var port = 3001;
+var port = process.env.PORT ||3001;
 
 app.listen(port, () => {
   console.log(`server listening at ${port}`)
