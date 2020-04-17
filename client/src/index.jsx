@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
 import GuestsDisplay from  './GuestsDisplay.jsx';
 import PriceBreakup from './PriceBreakup.jsx';
