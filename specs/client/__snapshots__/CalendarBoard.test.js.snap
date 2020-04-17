@@ -2,4 +2,6 @@
 
 exports[`CalendarBoard Component should render correctly 1`] = `ShallowWrapper {}`;
 
+exports[`DayComponenet Component should render correctly 1`] = `ShallowWrapper {}`;
+
 exports[`elements contained in CalendarBoard component should render correctly 1`] = `ShallowWrapper {}`;

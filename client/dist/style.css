@@ -91,6 +91,20 @@ float: right;
   border: 1px solid  rgb(61, 176, 180);
 
 }
+.bookedDates {
+  border:1px solid transparent;
+  border-color: rgb(113, 116, 101);
+  border-width: 1px;
+  font-size: 12px;
+  text-align: center;
+  float:center;
+  color: black;
+  font-weight: 1px;
+  margin: 0px;
+  padding: 2px;
+  font-family: arial, sans-serif;
+  background-color:  rgb(61, 176, 180);
+}
 
 .reserveButton {
   float: center;
@@ -204,11 +218,11 @@ float: right;
     height: 10px;
     width: 220px;
   }
-  tr {
+    tr {
     height: 20px;
     width: 20px;
   }
-  td {
+   td {
     height: 20px;
     width: 20px;
   }

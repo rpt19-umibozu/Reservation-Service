@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
 import GuestsDisplay from  './GuestsDisplay.jsx';
 import PriceBreakup from './PriceBreakup.jsx';
-import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights } from './helperFunc.js';
+import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights, getDatesRange } from './helperFunc.js';
 import $ from 'jquery';
 import '../dist/style.css'
 
@@ -36,7 +36,8 @@ class Reservation extends React.Component {
       numOfChildren: 0,
       numOfInfants:0,
       reviews: '',
-      msgUnderReserveButton: 'You won\'t be charged yet.'
+      msgUnderReserveButton: 'You won\'t be charged yet.',
+      newBookedDateRange: []
 
 
     }
@@ -175,8 +176,14 @@ class Reservation extends React.Component {
   console.log('checkInDate', checkInDate)
   var checkIn = checkInDate.slice(5)
   var checkInFormatted = checkIn.replace('/', '-');
-  var numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate)
-  this.setState({numOfNights: numOfNights})
+  var numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate);
+
+  var newBookedRangeOfDates = getDatesRange(checkInFormatted, checkOutDate);
+
+  this.setState({
+    numOfNights: numOfNights,
+    newBookedDateRange: newBookedRangeOfDates
+  })
   }
   var newStr = checkOutDate.replace('-', '/');
   newStr = '2020/' + newStr;
@@ -344,7 +351,7 @@ class Reservation extends React.Component {
      <button className="checkInButton" onClick={this.onClickCheckinButton}>{placeHolderOne}</button><span>&rarr;</span>
      <button className={checkOutNewClassName}>{placeHolderTwo}</button>
      </div>
-    <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates}/>}</div>
+    <div>{this.state.toggleCheckinToDisplayCalendar &&<CalendarBoard monthNum={this.state.monthNumber} month={this.state.monthName} year={this.state.currentYear}monthGrid={this.state.grid} onNext={this.goToNextMonth} onPrevious={this.goToPreviousMonth} onDayClick={this.onDayClick} onClear={this.clearDatesButton} booked={this.state.bookedDates} newBookedDateRange={this.state.newBookedDateRange}/>}</div>
     <div id="guestsStr"><span>Guests</span></div>
     <div className="guestsFrame">
       <span className="guestsDiv" onClick={this.onHandleGuestsClick}>  {this.state.guests} Guest</span>
