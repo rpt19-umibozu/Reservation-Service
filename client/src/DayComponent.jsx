@@ -11,6 +11,11 @@ var DayComponent = (props) => {
     value = 'empty'
   }
   var className;
+  console.log('newBookedRange', props.newBookedRange)
+  if (props.newBookedDateRange.includes(value)){
+    console.log('wentIn newbookedDates')
+    name = 'bookedDates';
+  }
   if (!props.booked.includes(value)) {
    name = 'availableDay'
   } else {
