@@ -11,7 +11,7 @@ jest.mock('../../client/src/DayComponent.jsx', () => 'DayComponent');
 
 const mockFn = jest.fn();
 
-const wrapper = mount(<DayComponent className="availableDay" onDayClick={mockFn}/>);
+// const wrapper = mount(<DayComponent className="availableDay" onDayClick={mockFn}/>);
 
 describe('DayComponenet Component', () => {
 
@@ -27,12 +27,12 @@ describe('DayComponenet Component', () => {
   });
 
   it('should call mock function when a day is clicked', () => {
-    const wrapper = mount(<DayComponent className="availableDay" onDayClick={mockFn}/>);
+    const wrapper = shallow(<DayComponent className="availableDay" onDayClick={mockFn}/>);
 
-    // wrapper.find('.availableDay').props('onClick')()
+    //wrapper.find('.availableDay').props('onClick')()
    wrapper.find('.availableDay').simulate('click')
     // expect(mockFn).toHaveBeenCalled();
-    expect(wrapper.find('.availableDay').length).to.equal(1);
+    expect(wrapper.find('.availableDay').length).toEqual(1);
   })
 
 })
