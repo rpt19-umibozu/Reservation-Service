@@ -5,7 +5,7 @@ const path = require('path');
 const { connection, getListingInfo, getBookedDates } = require ('../database');
 const fs = require('fs');
 const fullPath = '/home/ubuntu/FEC_Yingwen_service/client/dist/index.html';
-var expressStaticGzip = require('express-static-gzip');
+//var expressStaticGzip = require('express-static-gzip');
 var compression = require('compression');
 
 const app = express();
@@ -18,9 +18,9 @@ app.use(bodyParser.json());
 
 // app.use(express.static(__dirname + '/../client/dist'));
 app.use(compression());
-app.use('/', expressStaticGzip(path.join(__dirname + '/../client/dist'), {
-  enableBrotli: true
- }));
+// app.use('/', expressStaticGzip(path.join(__dirname + '/../client/dist'), {
+//   enableBrotli: true
+//  }));
 
 
 app.use(function(req, res, next) {
