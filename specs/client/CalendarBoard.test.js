@@ -29,9 +29,9 @@ describe('CalendarBoard Component', () => {
   it('should call mock function when a day is clicked', () => {
     const wrapper = shallow(<CalendarBoard className='calendarFrame' onDayClick={mockFn}/>);
 
-    wrapper.simulate('click')
-   // wrapper.find('.calendarFrame').simulate('click')
-    expect(mockFn).toHaveBeenCalled();
+    wrapper.find('.availableDay').simulate('click')
+    // expect(mockFn).toHaveBeenCalled();
+    expect(wrapper.find('.availableDay').length).toEqual(1);
   })
 
 })
