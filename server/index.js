@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 // app.use(express.static(__dirname + '/../client/dist'));
 app.use(compression());
 app.use('/', expressStaticGzip(path.join(__dirname + '/../client/dist'), {
-//   enableBrotli: true
-//  }));
+  enableBrotli: true
+ }));
 
 
 app.use(function(req, res, next) {
