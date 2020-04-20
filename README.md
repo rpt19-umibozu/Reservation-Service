@@ -1,39 +1,48 @@
 # Project Name
+Front-End Capstone
+This is a service within an item page with three other services. The item page is an Airbnb listing item page.
+This is the Reservation module service, which includes calendar features.
 
-> Project description
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  Reviews Service - https://github.com/rpt19-umibozu/devjce-fec-service
+  Photo Service- https://github.com/rpt19-umibozu/jason_FEC_service
+  Recommendation Service - https://github.com/rpt19-umibozu/FEC-Youzhu-recommendation
+
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+1. [Technologies](#Technologies)
+
 
 ## Usage
 
-> Some usage instructions
+### npm install
+  Install the dependencies in a local node_modules folder
 
-## Requirements
+### npm run react-dev
+  Builds the app for production to the build folder.
+  It correctly bundles React in production mode and optimizes the build for the best performance.
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+### npm run start
+  Runs the app in the development mode.
+  Open http://localhost:3001 to view it in the browser.
 
-- Node 6.13.0
-- etc
 
-## Development
+Technologies
 
-### Installing Dependencies
+- JavaScript
+- React
+- Node/Express
+- MYSQL
+- Webpack
+- Babel
+- Jest
+- Enzyme
+- SuperTest
+- AWS (EC2, S3)
 
-From within the root directory:
 
-```sh
-npm install -g webpack
-npm install
-```
 
