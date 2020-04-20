@@ -4,14 +4,20 @@
 1. [Overview](#Overview)
 1. [Other Services](#Other-Services)
 1. [Usage](#Usage)
-1. [Technologies](#Technologies)
+1. [Tech Stack](#Tech-Stack)
 1. [Copyright and License](#Copyright-and-License)
 
 ## Overview
 The Reservation Module includes a calendar feature.
 This Reservation Module Service was designed and written together with three other services to create an Item Listing Page within a team of 4 people.
 
-My contribution to the team is the Reservation Module Service.
+### My contributions:
+
+* Designed and built the Reservation Module.
+* Coordinated and deployed entire team’s modules on proxy server EC2 instance.
+* Utilized agile workflow practices on a 4 -person remote team.
+
+
 
 
 
@@ -40,7 +46,7 @@ My contribution to the team is the Reservation Module Service.
   Open http://localhost:3001 to view it in the browser.
 
 
-## Technologies
+## Tech Stack
 
 - JavaScript
 - React
