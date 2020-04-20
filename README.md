@@ -2,10 +2,10 @@
 
 ## Table of Contents
 1. [Overview](#Overview)
-1. [Other Services](#Other)
+1. [Other Services](#Other-Services)
 1. [Usage](#Usage)
 1. [Technologies](#Technologies)
-1. [Copyright and License](#License)
+1. [Copyright and License](#Copyright-and-License)
 
 ## Overview
 The Reservation Module includes a calendar feature.
