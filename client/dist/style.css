@@ -11,11 +11,9 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
-    margin:0;
-    padding:0;
-    border:0;
+
     outline:0;
-    font-size:100%;
+
     vertical-align:baseline;
     background:transparent;
 }
@@ -33,23 +31,6 @@ nav ul {
     list-style:none;
 }
 
-blockquote, q {
-    quotes:none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content:'';
-    content:none;
-}
-
-a {
-    margin:0;
-    padding:0;
-    font-size:100%;
-    vertical-align:baseline;
-    background:transparent;
-}
 
 /* change colours to suit your needs */
 ins {
