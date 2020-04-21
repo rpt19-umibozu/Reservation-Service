@@ -13,6 +13,7 @@ footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
 
 
+    outline:0;
     background:transparent;
 }
 
