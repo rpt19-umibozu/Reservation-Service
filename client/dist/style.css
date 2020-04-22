@@ -13,8 +13,6 @@ footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
 
     outline:0;
-
-    vertical-align:baseline;
     background:transparent;
 }
 
