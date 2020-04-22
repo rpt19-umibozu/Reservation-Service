@@ -7,6 +7,6 @@ module.exports = {
   coveragePathIgnorePatterns: [
    "/node_modules/"],
  moduleFileExtensions: ["js", "json", "jsx", 'ts', 'tsx'],
- transformIgnorePatterns:["/Users/yingwenchen/Desktop/HR project/HR_RPT/FEC/FEC_Yingwen_service/client/src/index.jsx", "/Users/yingwenchen/Desktop/HR project/HR_RPT/FEC/FEC_Yingwen_service/client/src/DayComponent.jsx",  "/Users/yingwenchen/Desktop/HR project/HR_RPT/FEC/FEC_Yingwen_service/client/src/PriceBreakup.jsx"]
+ transformIgnorePatterns:["/Users/yingwenchen/Desktop/HR project/HR_RPT/FEC/FEC_Yingwen_service/client/src/*.jsx"]
 
  }
