@@ -1,3 +1,79 @@
+
+html, body, div, span, object, iframe, button,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+
+    outline:0;
+
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+	display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
 .calendarFrame, .day {
   border-style: solid;
   border-color: rgb(113, 116, 101);
@@ -49,10 +125,14 @@
   color: rgb(61, 176, 180);
   font-family: arial, sans-serif;
   font-size: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .guestButton, .goRight, .checkOutButton {
 float: right;
+-webkit-appearance: none;
+-moz-appearance: none;
 }
 
 .tableHead {
@@ -117,6 +197,8 @@ float: right;
   font-family: arial, sans-serif;
   box-shadow: 0.5px 0.5px 5px #888888;
   border-color:#888888 !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 
 
 }
@@ -133,6 +215,8 @@ float: right;
   font-size: 12px;
   padding-top: 3px;
   border-radius: 2px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .checkOutButton {
@@ -141,6 +225,8 @@ float: right;
   font-size: 12px;
   padding-top: 3px;
   border-radius: 2px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 
   }
 
