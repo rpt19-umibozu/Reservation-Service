@@ -37,6 +37,9 @@ This Reservation Module Service was designed and written together with three oth
 ### npm install
   Install the dependencies in a local node_modules folder
 
+### npm run seed-db
+  Seed the database
+
 ### npm run react-dev
   Builds the app for production to the build folder.
   It correctly bundles React in production mode and optimizes the build for the best performance.
