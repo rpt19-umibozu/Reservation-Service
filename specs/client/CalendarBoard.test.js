@@ -27,12 +27,13 @@ describe('DayComponenet Component', () => {
   });
 
   it('should call mock function when a day is clicked', () => {
-    const wrapper = shallow(<DayComponent className="availableDay" onDayClick={mockFn}/>);
 
-    //wrapper.find('.availableDay').props('onClick')()
+    const wrapper = shallow(<DayComponent className="availableDay" onDayClick={mockFn} id='3-31'/>);
+
    wrapper.find('.availableDay').simulate('click')
-    // expect(mockFn).toHaveBeenCalled();
+
     expect(wrapper.find('.availableDay').length).toEqual(1);
+    expect(wrapper.props().id).toEqual('3-31')
   })
 
 })
