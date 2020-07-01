@@ -1,4 +1,7 @@
-# Project: Front-End Capstone
+# Project: Reservation Service
+
+
+(![Alt Text](https://media.giphy.com/media/RkEN4OkQaoILgOctnV/giphy.gif)
 
 ## Table of Contents
 1. [Overview](#Overview)
