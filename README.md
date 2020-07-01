@@ -57,7 +57,7 @@ This Reservation Module Service was designed and written together with three oth
 - JavaScript
 - React
 - Node/Express
-- MYSQL
+- MySQL
 - Webpack
 - Babel
 - Jest
