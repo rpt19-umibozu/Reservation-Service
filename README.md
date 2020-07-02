@@ -1,7 +1,7 @@
 # Project: Reservation Service
 
 
-(![Alt Text](https://media.giphy.com/media/XZmJbQyP9WhvOQVNb4/giphy.gif)
+(![Alt Text](https://media.giphy.com/media/MDlqmYpPXAInHyckGS/giphy.gif)
 
 ## Table of Contents
 1. [Overview](#Overview)
