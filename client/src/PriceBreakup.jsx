@@ -1,14 +1,14 @@
 import React from 'react'
 
-var PriceBreakup = (props) => {
-var price = props.price;
-var numOfNights = props.numOfNights;
-var subTotal = (price * numOfNights).toFixed(0);
-var tax = props.tax - 1;
-var service = props.serviceFee;
-var serviceSubtotal = (subTotal * service).toFixed(0);
-var taxAndFeesSubtotal = (subTotal * tax).toFixed(0);
-var total = Number(subTotal) + Number(serviceSubtotal) + Number(taxAndFeesSubtotal);
+let PriceBreakup = (props) => {
+let price = props.price;
+let numOfNights = props.numOfNights;
+let subTotal = (price * numOfNights).toFixed(0);
+let tax = props.tax - 1;
+let service = props.serviceFee;
+let serviceSubtotal = (subTotal * service).toFixed(0);
+let taxAndFeesSubtotal = (subTotal * tax).toFixed(0);
+let total = Number(subTotal) + Number(serviceSubtotal) + Number(taxAndFeesSubtotal);
 
   return (
     <div>

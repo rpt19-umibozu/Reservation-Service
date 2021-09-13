@@ -1,6 +1,6 @@
 import React from 'react';
 
-var GuestsDisplay = (props) => {
+const GuestsDisplay = (props) => {
 
 
   return (

@@ -60,23 +60,22 @@ class Reservation extends React.Component {
   }
   componentDidMount() {
     console.log('window', window.location.href)
-    var currentYear = +(new Date().getFullYear());
-    var currentMonth = +(new Date().getMonth()) + 1;
-    var monthFirstDay = getMonthFirstDay(currentMonth, currentYear)
-    var days = getMonthDays(currentMonth)
-    var monthName = getMonth(currentMonth)
-    //console.log('monthName', typeof monthName)
-    //console.log(monthFirstDay)
-    var grid = createMonth(days, monthFirstDay);
+   let currentYear = +(new Date().getFullYear());
+   let currentMonth = +(new Date().getMonth()) + 1;
+   let monthFirstDay = getMonthFirstDay(currentMonth, currentYear)
+   let days = getMonthDays(currentMonth)
+   let monthName = getMonth(currentMonth)
+
+   let grid = createMonth(days, monthFirstDay);
     this.setState({
       currentYear: currentYear,
       monthName: monthName,
       grid: grid,
       monthNumber: currentMonth
     })
-    var listingId = 10001;
-    var urlOne = 'http://localhost:3001/listingInfo';
-    var windowUrlString = window.location.href;
+   let listingId = 10001;
+   let urlOne = 'http://localhost:3001/listingInfo';
+   let windowUrlString = window.location.href;
     console.log('windowsUrl', windowUrlString)
     if (windowUrlString[windowUrlString.length - 1] === '/') {
       listingId = 10001
@@ -84,7 +83,7 @@ class Reservation extends React.Component {
       listingId = Number(windowUrlString.slice(-5));
       console.log('OtherlistingId', listingId)
     }
-    var reviewUrl = 'http://localhost:3004/averageScore' + listingId;
+   let reviewUrl = 'http://localhost:3004/averageScore' + listingId;
     console.log('reviewUrl', reviewUrl)
     this.getListingInfoFromServer(urlOne, listingId);
     this.getBookedDates('http://localhost:3001/getBookedDates', listingId);
@@ -105,16 +104,16 @@ class Reservation extends React.Component {
   //Calendar Component methods
    goToNextMonth () {
      console.log('next')
-    var currentYear = this.state.currentYear;
-    var currentMonth = this.state.monthNumber
-    var newMonth = currentMonth +1;
+   let currentYear = this.state.currentYear;
+   let currentMonth = this.state.monthNumber
+   let newMonth = currentMonth +1;
     console.log('newMonth', newMonth)
-    var monthFirstDay = getMonthFirstDay(newMonth, currentYear)
-    var days = getMonthDays(newMonth)
+   let monthFirstDay = getMonthFirstDay(newMonth, currentYear)
+   let days = getMonthDays(newMonth)
     console.log('daysOfNext', days)
     console.log('monthFirstDay', monthFirstDay)
-    var monthName = getMonth(newMonth)
-    var grid = createMonth(days, monthFirstDay)
+   let monthName = getMonth(newMonth)
+   let grid = createMonth(days, monthFirstDay)
     this.setState({
       grid: grid,
       currentYear: currentYear,
@@ -124,16 +123,16 @@ class Reservation extends React.Component {
   }
   goToPreviousMonth () {
     console.log('Previous')
-   var currentYear = this.state.currentYear;
-   var currentMonth = this.state.monthNumber;
-   var newMonth = currentMonth -1;
+  let currentYear = this.state.currentYear;
+  let currentMonth = this.state.monthNumber;
+  let newMonth = currentMonth -1;
    console.log('newMonth', newMonth)
-   var monthFirstDay = getMonthFirstDay(newMonth, currentYear)
-   var days = getMonthDays(newMonth)
+  let monthFirstDay = getMonthFirstDay(newMonth, currentYear)
+  let days = getMonthDays(newMonth)
    console.log('daysOfNext', days)
    console.log('monthFirstDay', monthFirstDay)
-   var monthName = getMonth(newMonth)
-   var grid = createMonth(days, monthFirstDay)
+  let monthName = getMonth(newMonth)
+  let grid = createMonth(days, monthFirstDay)
    this.setState({
      grid: grid,
      currentYear: currentYear,
@@ -143,16 +142,16 @@ class Reservation extends React.Component {
  }
  onDayClick(e) {
    console.log('onDayClick', e.target.id)
-  var checkInDate = e.target.id;
-  var clickedTimes = this.state.timesToggledonCheckinAndCheckOut;
-  var bookedDates = this.state.bookedDates;
+ let checkInDate = e.target.id;
+ let clickedTimes = this.state.timesToggledonCheckinAndCheckOut;
+ let bookedDates = this.state.bookedDates;
   if (!bookedDates.includes(checkInDate) && checkInDate !== 'empty') {
   this.setState({
     timesToggledonCheckinAndCheckOut: clickedTimes+1
   })
   if (this.state.timesToggledonCheckinAndCheckOut < 1) {
 
-   var newStr = checkInDate.replace('-', '/')
+  let newStr = checkInDate.replace('-', '/')
    console.log('newStr', newStr)
    newStr = '2020/' + newStr;
     this.setState({
@@ -169,23 +168,23 @@ class Reservation extends React.Component {
 
  displayCheckOutDate (e) {
  console.log('went in displayCheckOutDate')
-  var checkOutDate = e.target.id;
+ let checkOutDate = e.target.id;
   console.log('checkOutDate', checkOutDate)
   if (this.state.checkin) {
-  var checkInDate = this.state.checkin;
+ let checkInDate = this.state.checkin;
   console.log('checkInDate', checkInDate)
-  var checkIn = checkInDate.slice(5)
-  var checkInFormatted = checkIn.replace('/', '-');
-  var numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate);
+ let checkIn = checkInDate.slice(5)
+ let checkInFormatted = checkIn.replace('/', '-');
+ let numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate);
 
-  var newBookedRangeOfDates = getDatesRange(checkInFormatted, checkOutDate);
+ let newBookedRangeOfDates = getDatesRange(checkInFormatted, checkOutDate);
 
   this.setState({
     numOfNights: numOfNights,
     newBookedDateRange: newBookedRangeOfDates
   })
   }
-  var newStr = checkOutDate.replace('-', '/');
+ let newStr = checkOutDate.replace('-', '/');
   newStr = '2020/' + newStr;
 
 
@@ -215,7 +214,7 @@ class Reservation extends React.Component {
      method: 'GET',
      url: endPoint,
      success: (results) => {
-       var removeComma = results.split(',');
+      let removeComma = results.split(',');
        console.log('removeComma', removeComma)
        this.setState({
          reviews: removeComma
@@ -227,7 +226,7 @@ class Reservation extends React.Component {
    })
  }
  getListingInfoFromServer (url, id) {
-  var bodyObj = {
+ let bodyObj = {
     listingId: id
   };
   console.log('getListingInfoFromServer loading')
@@ -237,13 +236,13 @@ class Reservation extends React.Component {
     data: bodyObj,
     success: (data) => {
       console.log('data', data)
-    var parsedData = JSON.parse(data);
+   let parsedData = JSON.parse(data);
     //console.log('postIdToToServer Data', parsedData)
-    var name = parsedData[0].listingName;
-    var price = parsedData[0].pricePerNight;
-    var maxGuests = parsedData[0].maxGuests;
-    var weekendBoolean = parsedData[0].weekend;
-    var tax = parsedData[0].tax;
+   let name = parsedData[0].listingName;
+   let price = parsedData[0].pricePerNight;
+   let maxGuests = parsedData[0].maxGuests;
+   let weekendBoolean = parsedData[0].weekend;
+   let tax = parsedData[0].tax;
     this.setState({
       listingName: name,
       price: price,
@@ -259,7 +258,7 @@ class Reservation extends React.Component {
  }
 
  getBookedDates (url, id) {
-  var bodyObj = {
+ let bodyObj = {
     listingId: id
   };
   $.ajax({
@@ -267,12 +266,12 @@ class Reservation extends React.Component {
     url: url,
     data: bodyObj,
     success: (data) => {
-    var parsedData = JSON.parse(data);
+   let parsedData = JSON.parse(data);
     console.log('parsedData', parsedData)
-    var checkIn = parsedData[0].checkIn;
-    var checkOut = parsedData[0].checkOut;
+   let checkIn = parsedData[0].checkIn;
+   let checkOut = parsedData[0].checkOut;
     console.log('getBookedDates', parsedData)
-    var bookedDatesArray = iterateOverDataArray(parsedData);
+   let bookedDatesArray = iterateOverDataArray(parsedData);
     this.setState({
       bookedDates: bookedDatesArray
     })
@@ -320,9 +319,9 @@ class Reservation extends React.Component {
 
 
   render () {
-    var placeHolderOne;
-    var placeHolderTwo;
-    var checkOutNewClassName;
+   let placeHolderOne;
+   let placeHolderTwo;
+   let checkOutNewClassName;
     if (this.state.checkin !== null) {
       placeHolderOne = this.state.checkin;
 

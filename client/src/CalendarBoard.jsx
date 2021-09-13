@@ -1,10 +1,8 @@
 import React from 'react';
 import WeekRow from './WeekRow.jsx';
-//import createMonth from './help.js'
 
-var CalendarBoard = (props) => {
 
- //const arr = createMonth(31, 6)
+const CalendarBoard = (props) => {
 
  return (
   <div className="calendarFrame">

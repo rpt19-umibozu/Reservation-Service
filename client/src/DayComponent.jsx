@@ -1,16 +1,16 @@
 import React from 'react';
 import { zeroPadding } from './helperFunc.js'
 
-var DayComponent = (props) => {
-  var day = props.days;
-  var month = zeroPadding(props.month);
-  var value = `${month}-${day}`;
+const DayComponent = (props) => {
+  let day = props.days;
+  let month = zeroPadding(props.month);
+  let value = `${month}-${day}`;
   if (day !== '') {
     value = `${month}-${day}`;
   } else {
     value = 'empty'
   }
-  var name;
+  let name;
   console.log('newBookedRange', props.newBookedDateRange)
   if (props.newBookedDateRange.includes(value)){
     console.log('wentIn newbookedDates')
