@@ -1,9 +1,7 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
 import CalendarBoard from './CalendarBoard.jsx';
 import GuestsDisplay from  './GuestsDisplay.jsx';
 import PriceBreakup from './PriceBreakup.jsx';
-import { getMonthDays, getFullYear, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights, getDatesRange } from './helperFunc.js';
+import { getMonthDays, getMonthFirstDay, createMonth, getMonth, iterateOverDataArray, calculateNumOfNights, getDatesRange } from './helperFunc.js';
 import $ from 'jquery';
 import '../dist/style.css'
 
@@ -59,12 +57,11 @@ class Reservation extends React.Component {
 
   }
   componentDidMount() {
-    console.log('window', window.location.href)
    let currentYear = +(new Date().getFullYear());
    let currentMonth = +(new Date().getMonth()) + 1;
-   let monthFirstDay = getMonthFirstDay(currentMonth, currentYear)
-   let days = getMonthDays(currentMonth)
-   let monthName = getMonth(currentMonth)
+   let monthFirstDay = getMonthFirstDay(currentMonth, currentYear);
+   let days = getMonthDays(currentMonth);
+   let monthName = getMonth(currentMonth);
 
    let grid = createMonth(days, monthFirstDay);
     this.setState({
@@ -104,15 +101,13 @@ class Reservation extends React.Component {
    goToNextMonth () {
      console.log('next')
    let currentYear = this.state.currentYear;
-   let currentMonth = this.state.monthNumber
+   let currentMonth = this.state.monthNumber;
    let newMonth = currentMonth +1;
 
-   let monthFirstDay = getMonthFirstDay(newMonth, currentYear)
-   let days = getMonthDays(newMonth)
-    console.log('daysOfNext', days)
-    console.log('monthFirstDay', monthFirstDay)
-   let monthName = getMonth(newMonth)
-   let grid = createMonth(days, monthFirstDay)
+   let monthFirstDay = getMonthFirstDay(newMonth, currentYear);
+   let days = getMonthDays(newMonth);
+   let monthName = getMonth(newMonth);
+   let grid = createMonth(days, monthFirstDay);
     this.setState({
       grid: grid,
       currentYear: currentYear,
@@ -124,10 +119,10 @@ class Reservation extends React.Component {
   let currentYear = this.state.currentYear;
   let currentMonth = this.state.monthNumber;
   let newMonth = currentMonth -1;
-  let monthFirstDay = getMonthFirstDay(newMonth, currentYear)
-  let days = getMonthDays(newMonth)
-  let monthName = getMonth(newMonth)
-  let grid = createMonth(days, monthFirstDay)
+  let monthFirstDay = getMonthFirstDay(newMonth, currentYear);
+  let days = getMonthDays(newMonth);
+  let monthName = getMonth(newMonth);
+  let grid = createMonth(days, monthFirstDay);
    this.setState({
      grid: grid,
      currentYear: currentYear,
@@ -225,11 +220,9 @@ class Reservation extends React.Component {
     data: bodyObj,
     success: (data) => {
       let parsedData = JSON.parse(data);
-        //console.log('postIdToToServer Data', parsedData)
       let name = parsedData[0].listingName;
       let price = parsedData[0].pricePerNight;
       let maxGuests = parsedData[0].maxGuests;
-      let weekendBoolean = parsedData[0].weekend;
       let tax = parsedData[0].tax;
       this.setState({
         listingName: name,
@@ -317,7 +310,7 @@ class Reservation extends React.Component {
 
     } else {
       placeHolderTwo = 'Checkout';
-      checkOutNewClassName = 'checkOutButton'
+      checkOutNewClassName = 'checkOutButton';
 
     }
     if(this.state.timesToggledonCheckinAndCheckOut !== 0) {
@@ -352,5 +345,4 @@ class Reservation extends React.Component {
   }
 }
 
-//{this.state.displayGuestsMenu && <GuestsDisplay />}
-ReactDOM.render(<Reservation/>, document.getElementById('reservation'))
+ReactDOM.render(<Reservation/>, document.getElementById('reservation'));
