@@ -97,10 +97,9 @@ export const getDatesRange = (checkIn, checkOut) => {
   let dateString;
   let checkInMonth = checkIn.slice(0, 2);
   let checkOutMonth = checkOut.slice(0, 2);
-  console.log("checInMonth", checkInMonth);
   let checkInMonthDays = Number(checkIn.slice(3));
   let checkOutMonthDays = Number(checkOut.slice(3));
-  console.log("checkInMonthSDays", checkInMonthDays);
+
   //same month for checkin date and checkout date
   if (checkInMonth === checkOutMonth) {
     for (let i = checkInMonthDays; i <= checkOutMonthDays; i++) {
@@ -116,7 +115,7 @@ export const getDatesRange = (checkIn, checkOut) => {
       month = Number(checkInMonth);
     }
     let days = getMonthDays(month, year);
-    // console.log('monthTwo', month)
+
     for (let i = checkInMonthDays; i <= days; i++) {
       dateString = `${checkInMonth}-${i}`;
       storage.push(dateString);
@@ -147,7 +146,6 @@ export const calculateNumOfNights = (checkIn, checkOut) => {
   let year = 2020;
   let checkInMonth = checkIn.slice(0, 2);
   let checkOutMonth = checkOut.slice(0, 2);
-  console.log("checkInMonth", checkInMonth);
   let checkInMonthDays = Number(checkIn.slice(3));
   let checkOutMonthDays = Number(checkOut.slice(3));
   if (checkInMonth === checkOutMonth) {

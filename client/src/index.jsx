@@ -76,15 +76,14 @@ class Reservation extends React.Component {
    let listingId = 10001;
    let urlOne = 'http://localhost:3001/listingInfo';
    let windowUrlString = window.location.href;
-    console.log('windowsUrl', windowUrlString)
+
     if (windowUrlString[windowUrlString.length - 1] === '/') {
       listingId = 10001
     } else {
       listingId = Number(windowUrlString.slice(-5));
-      console.log('OtherlistingId', listingId)
     }
    let reviewUrl = 'http://localhost:3004/averageScore' + listingId;
-    console.log('reviewUrl', reviewUrl)
+
     this.getListingInfoFromServer(urlOne, listingId);
     this.getBookedDates('http://localhost:3001/getBookedDates', listingId);
     this.getReviews(reviewUrl);
@@ -107,7 +106,7 @@ class Reservation extends React.Component {
    let currentYear = this.state.currentYear;
    let currentMonth = this.state.monthNumber
    let newMonth = currentMonth +1;
-    console.log('newMonth', newMonth)
+
    let monthFirstDay = getMonthFirstDay(newMonth, currentYear)
    let days = getMonthDays(newMonth)
     console.log('daysOfNext', days)
@@ -122,15 +121,11 @@ class Reservation extends React.Component {
     })
   }
   goToPreviousMonth () {
-    console.log('Previous')
   let currentYear = this.state.currentYear;
   let currentMonth = this.state.monthNumber;
   let newMonth = currentMonth -1;
-   console.log('newMonth', newMonth)
   let monthFirstDay = getMonthFirstDay(newMonth, currentYear)
   let days = getMonthDays(newMonth)
-   console.log('daysOfNext', days)
-   console.log('monthFirstDay', monthFirstDay)
   let monthName = getMonth(newMonth)
   let grid = createMonth(days, monthFirstDay)
    this.setState({
@@ -141,51 +136,47 @@ class Reservation extends React.Component {
    })
  }
  onDayClick(e) {
-   console.log('onDayClick', e.target.id)
- let checkInDate = e.target.id;
- let clickedTimes = this.state.timesToggledonCheckinAndCheckOut;
- let bookedDates = this.state.bookedDates;
-  if (!bookedDates.includes(checkInDate) && checkInDate !== 'empty') {
-  this.setState({
-    timesToggledonCheckinAndCheckOut: clickedTimes+1
-  })
-  if (this.state.timesToggledonCheckinAndCheckOut < 1) {
 
-  let newStr = checkInDate.replace('-', '/')
-   console.log('newStr', newStr)
-   newStr = '2020/' + newStr;
-    this.setState({
-      checkin: newStr,
-      displayCheckOut: !this.state.displayCheckOut
-    })
-  }
-  }
-  if (this.state.checkin) {
-    this.displayCheckOutDate(e);
-  }
+   let checkInDate = e.target.id;
+   let clickedTimes = this.state. timesToggledonCheckinAndCheckOut;
+   let bookedDates = this.state.bookedDates;
+   if (!bookedDates.includes(checkInDate) && checkInDate !== 'empty') {
+     this.setState({
+       timesToggledonCheckinAndCheckOut: clickedTimes+1
+     })
+     if (this.state.timesToggledonCheckinAndCheckOut < 1) {
+
+       let newStr = checkInDate.replace('-', '/');
+       newStr = '2020/' + newStr;
+       this.setState({
+          checkin: newStr,
+          displayCheckOut: !this.state.displayCheckOut
+       })
+      }
+    }
+    if (this.state.checkin) {
+      this.displayCheckOutDate(e);
+    }
 
  }
 
  displayCheckOutDate (e) {
- console.log('went in displayCheckOutDate')
- let checkOutDate = e.target.id;
-  console.log('checkOutDate', checkOutDate)
-  if (this.state.checkin) {
- let checkInDate = this.state.checkin;
-  console.log('checkInDate', checkInDate)
- let checkIn = checkInDate.slice(5)
- let checkInFormatted = checkIn.replace('/', '-');
- let numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate);
+   let checkOutDate = e.target.id;
+   if (this.state.checkin) {
+     let checkInDate = this.state.checkin;
+     let checkIn = checkInDate.slice(5)
+     let checkInFormatted = checkIn.replace('/', '-');
+     let numOfNights = calculateNumOfNights(checkInFormatted, checkOutDate);
 
- let newBookedRangeOfDates = getDatesRange(checkInFormatted, checkOutDate);
+     let newBookedRangeOfDates = getDatesRange(checkInFormatted, checkOutDate);
 
-  this.setState({
-    numOfNights: numOfNights,
-    newBookedDateRange: newBookedRangeOfDates
-  })
-  }
- let newStr = checkOutDate.replace('-', '/');
-  newStr = '2020/' + newStr;
+     this.setState({
+      numOfNights: numOfNights,
+      newBookedDateRange: newBookedRangeOfDates
+     })
+    }
+   let newStr = checkOutDate.replace('-', '/');
+   newStr = '2020/' + newStr;
 
 
     this.setState({
@@ -197,7 +188,6 @@ class Reservation extends React.Component {
 
  }
  clearDatesButton () {
-   console.log('clear Dates')
 
    this.setState({
      checkin: null,
@@ -215,10 +205,9 @@ class Reservation extends React.Component {
      url: endPoint,
      success: (results) => {
       let removeComma = results.split(',');
-       console.log('removeComma', removeComma)
-       this.setState({
-         reviews: removeComma
-       })
+      this.setState({
+        reviews: removeComma
+      })
      },
      error: (err) => {
        console.log('error', err);
@@ -226,29 +215,28 @@ class Reservation extends React.Component {
    })
  }
  getListingInfoFromServer (url, id) {
- let bodyObj = {
-    listingId: id
-  };
-  console.log('getListingInfoFromServer loading')
+   let bodyObj = {
+      listingId: id
+    };
+
   $.ajax({
     method: 'GET',
     url: url,
     data: bodyObj,
     success: (data) => {
-      console.log('data', data)
-   let parsedData = JSON.parse(data);
-    //console.log('postIdToToServer Data', parsedData)
-   let name = parsedData[0].listingName;
-   let price = parsedData[0].pricePerNight;
-   let maxGuests = parsedData[0].maxGuests;
-   let weekendBoolean = parsedData[0].weekend;
-   let tax = parsedData[0].tax;
-    this.setState({
-      listingName: name,
-      price: price,
-      maxGuests: maxGuests,
-      tax: tax
-    })
+      let parsedData = JSON.parse(data);
+        //console.log('postIdToToServer Data', parsedData)
+      let name = parsedData[0].listingName;
+      let price = parsedData[0].pricePerNight;
+      let maxGuests = parsedData[0].maxGuests;
+      let weekendBoolean = parsedData[0].weekend;
+      let tax = parsedData[0].tax;
+      this.setState({
+        listingName: name,
+        price: price,
+        maxGuests: maxGuests,
+        tax: tax
+      })
     },
     error: (err) => {
       console.log('error', err);
@@ -266,15 +254,13 @@ class Reservation extends React.Component {
     url: url,
     data: bodyObj,
     success: (data) => {
-   let parsedData = JSON.parse(data);
-    console.log('parsedData', parsedData)
-   let checkIn = parsedData[0].checkIn;
-   let checkOut = parsedData[0].checkOut;
-    console.log('getBookedDates', parsedData)
-   let bookedDatesArray = iterateOverDataArray(parsedData);
-    this.setState({
-      bookedDates: bookedDatesArray
-    })
+      let parsedData = JSON.parse(data);
+      let checkIn = parsedData[0].checkIn;
+      let checkOut = parsedData[0].checkOut;
+      let bookedDatesArray = iterateOverDataArray(parsedData);
+        this.setState({
+          bookedDates: bookedDatesArray
+        })
     },
     error: (err) => {
       console.log('error', err);
@@ -297,14 +283,12 @@ class Reservation extends React.Component {
   }
  }
  onIncreaseOfAdults () {
-   console.log('clicked to increase')
    this.setState({
      guests: this.state.guests+1
    })
  }
 
  onDecreaseOfAdults () {
-  console.log('clicked to decrease')
   this.setState({
     guests: this.state.guests-1
   })
