@@ -9,7 +9,7 @@ import {
   iterateOverDataArray,
   calculateNumOfNights,
   getDatesRange,
-} from "./helperFunc.js";
+} from "./utils.js";
 import "../dist/style.css";
 
 class Reservation extends React.Component {
