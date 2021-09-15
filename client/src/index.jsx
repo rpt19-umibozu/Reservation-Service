@@ -237,7 +237,6 @@ class Reservation extends React.Component {
       })
       .then((parsedData) => {
         let bookedDatesArray = iterateOverDataArray(parsedData);
-        console.log(bookedDatesArray);
         this.setState({
           bookedDates: bookedDatesArray,
         });
