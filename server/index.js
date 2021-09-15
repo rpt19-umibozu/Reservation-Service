@@ -18,25 +18,25 @@ app.use(cors());
 
 app.use(express.static(__dirname + "/../client/dist"));
 
-app.get("/listingInfo", (req, res) => {
+app.get("/listingInfo/:id", (req, res) => {
   //should give listingId 10001 back to the client when page first renders
-  let reqId = req.query.listingId;
 
-  getListingInfo(reqId, (err, results) => {
+  let { id } = req.params;
+
+  getListingInfo(id, (err, results) => {
     if (err) {
       res.status(404).end("NOT FOUND");
       console.log("err", err);
     } else {
-      let stringifyResults = JSON.stringify(results);
-      res.status(200).end(stringifyResults);
+      res.status(200).json(results);
     }
   });
 });
 
-app.post("/getBookedDates", (req, res) => {
-  let listingId = req.body.listingId;
+app.get("/getBookedDates/:id", (req, res) => {
+  let { id } = req.params;
 
-  getBookedDates(listingId, (err, results) => {
+  getBookedDates(id, (err, results) => {
     if (err) {
       res.status(404).end("NOT FOUND");
     } else {
