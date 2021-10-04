@@ -23,6 +23,12 @@ const getListingInfo = (listingId, callback) => {
   });
 };
 
+/**
+ * Gets the bookedDates using listing id
+ * @param {Number} listingId
+ * @returns {Array}: array length 1, containing booking dates details object (or array length 0)
+ */
+
 const getBookedDates = (listingId, callback) => {
   var queryStr = `Select * from bookings Where listingId=${listingId};`;
   connection.query(queryStr, (err, results) => {

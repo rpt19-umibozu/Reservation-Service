@@ -18,8 +18,9 @@ app.use(cors());
 
 app.use(express.static(__dirname + "/../client/dist"));
 
+// Get the default listing information
 app.get("/listingInfo/:id", (req, res) => {
-  //should give listingId 10001 back to the client when page first renders
+  // should give listingId 10001 back to the client when page first renders
 
   let { id } = req.params;
 
@@ -33,6 +34,7 @@ app.get("/listingInfo/:id", (req, res) => {
   });
 });
 
+// Get the booked dates from a specific listing id
 app.get("/getBookedDates/:id", (req, res) => {
   let { id } = req.params;
 
@@ -44,6 +46,7 @@ app.get("/getBookedDates/:id", (req, res) => {
     }
   });
 });
+// Get information from listing Id read from params
 app.get("/:id", (req, res) => {
   fs.readFile(fullPath, "utf8", (err, results) => {
     if (err) {
