@@ -130,7 +130,6 @@ const toFillListingItemsTable = function () {
     listingTableData += `INSERT into listingItems (listingId, listingName, pricePerNight, weekend, weekendPrice, maxGuests, tax) VALUES (${listingId}, '${listingNames[i]}', ${pricePerNight}, ${weekend}, 1.1, ${maxGuests}, 1.12);\n `;
     listingId++;
   }
-  //return listingTableData;
 };
 //invoke function to populate Listing table data
 toFillListingItemsTable();
@@ -153,10 +152,10 @@ const makeCalendarDays = function () {
     isTrue = !isTrue;
   }
 };
-//invoke makeCalendarDays to fill the arrOfCalendarDays variable
+// invoke makeCalendarDays to fill the arrOfCalendarDays variable
 makeCalendarDays();
 
-//function to check Which Month is it for start date and end date
+// function to check Which Month is it for start date and end date
 const checkWhichMonth = function (acum) {
   let month;
   if (acum < 30) {
